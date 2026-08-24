@@ -40,6 +40,27 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toStri
          préchargement des variantes essentielles. Conforme RGPD. -->
     <Font cssVariable="--font-montserrat" preload />
 
+    <!-- Google tag (gtag.js) — Consent Mode : mesure refusée par défaut,
+         le choix mémorisé (bandeau cookies, clé 'adnot-consent') est réappliqué à chaque visite -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-1ZJPELCKN6"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      });
+      try {
+        if (localStorage.getItem('adnot-consent') === 'granted') {
+          gtag('consent', 'update', { analytics_storage: 'granted' });
+        }
+      } catch (e) {}
+      gtag('js', new Date());
+      gtag('config', 'G-1ZJPELCKN6');
+    </script>
+
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />

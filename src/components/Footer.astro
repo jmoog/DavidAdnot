@@ -52,6 +52,14 @@ import reviews from '../data/reviews.json';
 
   <div class="pied__legal">
     <p><span>David Adnot — Artisan couvreur dans les Yvelines.</span> <span>Garantie décennale.</span></p>
+    <div class="pied__credit">
+      <a class="pied__credit-marque" href="https://local-place.fr/" target="_blank" rel="noopener">
+        <img src="/images/logo-local-place-pin.png" alt="" width="17" height="26" loading="lazy" />
+        <span>Site créé par <strong>Local Place</strong></span>
+      </a>
+      <span class="pied__credit-sep" aria-hidden="true">·</span>
+      <a class="pied__credit-fiche" href="https://local-place.fr/entreprise/adnot-couvreur/" target="_blank" rel="noopener">Adnot Couvreur sur l'annuaire Local&nbsp;Place</a>
+    </div>
   </div>
 </footer>
 
@@ -91,6 +99,28 @@ import reviews from '../data/reviews.json';
   }
   .pied__legal p { margin: 0; text-align: center; }
   .pied__legal span { display: inline-block; }
+  .pied__credit {
+    margin-top: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.7rem;
+  }
+  .pied__credit-marque {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--blanc);
+  }
+  .pied__credit-marque img { height: 24px; width: auto; display: block; }
+  .pied__credit-marque strong { font-weight: 700; }
+  .pied__credit-fiche { text-decoration: underline; text-underline-offset: 2px; }
+  .pied__credit a:hover { color: var(--rouge-pale); }
+  .pied__credit-sep { opacity: 0.5; }
+  @media (max-width: 640px) {
+    .pied__credit-sep { display: none; }
+  }
 
   @media (max-width: 800px) {
     .pied__grille { text-align: center; }

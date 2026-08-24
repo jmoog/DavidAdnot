@@ -49,7 +49,9 @@ const TEL        = '06 60 49 14 30';
 const TEL_HREF   = 'tel:+33660491430';
 const ARTISAN    = 'David Adnot';
 const ENTREPRISE = 'Adnot Couvreur - Couvreur dans les Yvelines (78)';
-const LOGO_URL   = `${SITE_URL}/images/logo-david-adnot-artisan-couvreur.webp`;
+// PNG dédié aux emails : fond blanc intégré (pas de détourage) et format PNG,
+// car Outlook n'affiche pas le webp et ignore padding/background CSS sur <img>.
+const LOGO_URL   = `${SITE_URL}/images/logo-adnot-email.png`;
 
 // ────────────────────────────────────────────────────────────────────────
 // Helpers
@@ -141,7 +143,7 @@ function notifTemplate(d: DevisData) {
           <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
             <tr>
               <td valign="middle" width="84" style="padding-right:18px;">
-                <img src="${LOGO_URL}" width="72" height="72" alt="${ENTREPRISE}" style="display:block;width:72px;height:72px;border-radius:14px;background:#fff;padding:10px;box-sizing:border-box;box-shadow:0 2px 6px rgba(0,0,0,0.18);">
+                <img src="${LOGO_URL}" width="72" height="72" alt="${ENTREPRISE}" style="display:block;width:72px;height:72px;border-radius:12px;">
               </td>
               <td valign="middle">
                 <div style="font-size:12px;text-transform:uppercase;letter-spacing:.1em;opacity:.7;font-weight:700;">Nouvelle demande de devis</div>
@@ -173,12 +175,12 @@ function notifTemplate(d: DevisData) {
           <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
             <tr>
               <td style="padding:8px 0;">
-                <a href="tel:${escapeHtml(telClean)}" style="display:block;background:${COLOR_ORANGE};color:#fff;text-decoration:none;padding:20px 24px;border-radius:10px;font-weight:700;font-size:17px;line-height:1.3;text-align:center;">📞 Appeler ${escapeHtml(prenom)} — ${escapeHtml(d.tel)}</a>
+                <a href="tel:${escapeHtml(telClean)}" style="display:block;background:${COLOR_ORANGE};color:#fff;text-decoration:none;padding:20px 24px;border-radius:10px;font-weight:700;font-size:17px;line-height:1.3;text-align:center;">Appeler ${escapeHtml(prenom)} — ${escapeHtml(d.tel)}</a>
               </td>
             </tr>
             <tr>
               <td style="padding:8px 0;">
-                <a href="mailto:${escapeHtml(d.email)}?subject=${encodeURIComponent('Re: votre demande de devis - Adnot Couvreur')}" style="display:block;background:${COLOR_BLUE};color:#fff;text-decoration:none;padding:20px 24px;border-radius:10px;font-weight:700;font-size:17px;line-height:1.3;text-align:center;">✉️ Répondre par email</a>
+                <a href="mailto:${escapeHtml(d.email)}?subject=${encodeURIComponent('Re: votre demande de devis - Adnot Couvreur')}" style="display:block;background:${COLOR_BLUE};color:#fff;text-decoration:none;padding:20px 24px;border-radius:10px;font-weight:700;font-size:17px;line-height:1.3;text-align:center;">Répondre par email</a>
               </td>
             </tr>
           </table>
@@ -219,7 +221,7 @@ function ackTemplate(d: DevisData) {
     <tr><td align="center">
       <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width:600px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06);">
         <tr><td style="background:${COLOR_BLUE_D};padding:32px 32px 28px;color:#fff;text-align:center;">
-          <img src="${LOGO_URL}" width="120" height="120" alt="${ENTREPRISE}" style="display:block;width:120px;height:120px;margin:0 auto 16px;border-radius:18px;background:#fff;padding:14px;box-sizing:border-box;box-shadow:0 3px 10px rgba(0,0,0,0.2);">
+          <img src="${LOGO_URL}" width="120" height="120" alt="${ENTREPRISE}" style="display:block;width:120px;height:120px;margin:0 auto 16px;border-radius:16px;">
           <div style="font-size:20px;font-weight:800;">Adnot Couvreur</div>
           <div style="font-size:13px;opacity:.85;margin-top:2px;">Artisan couvreur dans les Yvelines (78)</div>
         </td></tr>

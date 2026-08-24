@@ -1,0 +1,21 @@
+{
+  "name": "adnot-couvreur-78",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/node": "^10.1.1",
+    "@astrojs/sitemap": "^3.7.2",
+    "astro": "^6.1.1"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-arm64-gnu": "^4.61.0"
+  }
+}

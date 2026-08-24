@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FilAriane from '../components/FilAriane.astro';
+import AvisCarrousel from '../components/AvisCarrousel.astro';
+import CtaDevis from '../components/CtaDevis.astro';
+import services from '../data/services.json';
+
+const title = 'À propos de M. ADNOT Artisan Couvreur 78';
+const description = "David Adnot, artisan couvreur de père en fils basé à Rambouillet (78) : compétence, expérience et service client pour tous vos travaux de couverture dans les Yvelines.";
+---
+<BaseLayout title={title} description={description}>
+  <section class="section">
+    <div class="conteneur">
+      <FilAriane items={[{ label: 'Accueil', href: '/' }, { label: 'À propos' }]} />
+    </div>
+    <div class="conteneur duo">
+      <div>
+        <h1>À propos de M. Adnot, artisan couvreur</h1>
+        <h2>Compétence et expérience : nous avons un beau métier</h2>
+        <p>
+          Le couvreur réalise, répare et entretient les toitures de manière à ce que celles-ci
+          assurent au mieux leur rôle de protection contre les intempéries — la mise hors d'eau
+          du bâtiment. Les caractéristiques géographiques, culturelles et climatiques du lieu du
+          chantier influent sur le choix des éléments de couverture à poser : tuiles, ardoises,
+          zinc, bac acier…
+        </p>
+        <p>
+          Artisan couvreur de père en fils, j'ai appris ce métier au sein de ma famille et je le
+          pratique depuis plus de 20 ans avec la même exigence : un travail durable, réalisé
+          dans les règles de l'art, et des clients à qui j'explique chaque étape du chantier.
+        </p>
+        <h2>Qualité et service client</h2>
+        <p>
+          Je suis au service de mes clients et je possède l'expérience et les compétences pour
+          réaliser tous les travaux de couverture : <a href="/renovation-toiture/">rénovation de
+          toiture</a>, <a href="/nettoyage-demoussage-toiture/">démoussage et nettoyage</a>,
+          <a href="/recherche-de-fuites/">recherche de fuites</a>,
+          <a href="/pose-de-velux/">pose de Velux</a> et
+          <a href="/zinguerie-gouttieres/">pose de gouttières</a>.
+        </p>
+        <h2>Un artisan en Île-de-France</h2>
+        <p>
+          Mon atelier est installé Zone Industrielle le Pâtis, 4 Rue Paul Démange,
+          78120 Rambouillet. J'interviens dans tout le sud des Yvelines — Rambouillet,
+          Saint-Arnoult-en-Yvelines, Sonchamp, Cernay-la-Ville… — ainsi que dans les communes
+          limitrophes des départements voisins.
+        </p>
+      </div>
+      <div>
+        <img
+          src="/images/equipe/david-adnot-couvreur-rambouillet-01.webp"
+          alt="Chantier David Adnot Artisan Couvreur avec échafaudage et panneau de chantier"
+          loading="lazy"
+          width="1000"
+          height="1200"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Prestations ──────────────────────────────────────────── -->
+  <section class="section section--gris">
+    <div class="conteneur">
+      <h2>Mes prestations de couverture</h2>
+      <div class="grille-services">
+        {services.map((s) => (
+          <a href={`/${s.slug}/`} class="carte carte-service">
+            <img src={s.image} alt={s.alt} loading="lazy" width="400" height="250" />
+            <span class="carte-service__corps">
+              <h3>{s.label}</h3>
+              <p>{s.accroche}</p>
+              <span class="carte-service__lien">{s.lien} →</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <AvisCarrousel ordre={8} />
+
+  <CtaDevis />
+</BaseLayout>

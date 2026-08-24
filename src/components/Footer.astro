@@ -1,0 +1,102 @@
+---
+import services from '../data/services.json';
+import villes from '../data/villes.json';
+import reviews from '../data/reviews.json';
+---
+<footer class="pied">
+  <div class="conteneur pied__grille">
+    <div class="pied__bloc pied__marque">
+      <img src="/images/logo-david-adnot-artisan-couvreur.webp" alt="Logo David Adnot Artisan Couvreur" width="120" height="120" loading="lazy" />
+      <p><strong>David Adnot — Artisan Couvreur</strong><br />Couvreur dans les Yvelines (78)</p>
+      <p>Zone Industrielle le Pâtis<br />4 Rue Paul Démange<br />78120 Rambouillet</p>
+      <p>
+        <a href="tel:0660491430">06 60 49 14 30</a><br />
+        <a href="mailto:contact@adnot-couvreur.fr">contact@adnot-couvreur.fr</a>
+      </p>
+      <p class="pied__note" aria-label={`Note Google : ${reviews.note} sur 5, ${reviews.nombre} avis`}>
+        <span class="pied__etoiles" aria-hidden="true">★★★★★</span> {reviews.note.toLocaleString('fr-FR')}/5 · {reviews.nombre} avis Google
+      </p>
+    </div>
+
+    <nav class="pied__bloc" aria-label="Mes prestations">
+      <h2>Mes prestations</h2>
+      <ul>
+        {services.map((s) => (
+          <li><a href={`/${s.slug}/`}>{s.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav class="pied__bloc" aria-label="Zone d'intervention">
+      <h2>Zone d'intervention</h2>
+      <ul>
+        {villes.map((v) => (
+          <li><a href={`/couvreur-a-${v.slug}/`}>{v.nom}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav class="pied__bloc" aria-label="Informations">
+      <h2>Informations</h2>
+      <ul>
+        <li><a href="/a-propos-de-m-adnot-artisan-couvreur/">À propos</a></li>
+        <li><a href="/services-adnot-couvreur/">Toutes mes prestations</a></li>
+        <li><a href="/galerie-photo/">Galerie photo</a></li>
+        <li><a href="/contact/">Devis gratuit et contact</a></li>
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+        <li><a href="/politique-de-confidentialite/">Politique de confidentialité</a></li>
+        <li><a href="/plan-du-site/">Plan du site</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="pied__legal">
+    <p><span>David Adnot — Artisan couvreur dans les Yvelines.</span> <span>Garantie décennale.</span></p>
+  </div>
+</footer>
+
+<style>
+  .pied {
+    background: var(--bleu-fonce);
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: auto;
+    font-size: 0.93rem;
+  }
+  .pied__grille {
+    display: grid;
+    gap: 2.5rem;
+    padding-block: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .pied__bloc h2 {
+    color: var(--blanc);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+  .pied__bloc ul { list-style: none; padding: 0; display: grid; gap: 0.4rem; }
+  .pied a { color: rgba(255, 255, 255, 0.85); text-decoration: none; }
+  .pied a:hover { color: var(--rouge-pale); text-decoration: underline; }
+  .pied__marque img { height: 70px; width: auto; margin-bottom: 1rem; background: var(--blanc); border-radius: var(--rayon); padding: 0.3rem; }
+  .pied__marque p { margin-block: 0.5rem; }
+  .pied__etoiles { color: var(--etoile); letter-spacing: 0.1em; }
+  .pied__note { font-weight: 600; color: var(--blanc); }
+  .pied__legal {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    text-align: center;
+    padding: 1.2rem 1rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .pied__legal p { margin: 0; text-align: center; }
+  .pied__legal span { display: inline-block; }
+
+  @media (max-width: 800px) {
+    .pied__grille { text-align: center; }
+    .pied__grille p { text-align: center; }
+    .pied__bloc h2 { text-align: center; }
+    .pied__bloc ul { justify-items: center; }
+    .pied__marque img { margin-inline: auto; }
+  }
+</style>

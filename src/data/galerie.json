@@ -1,0 +1,101 @@
+[
+  {
+    "cle": "renovation",
+    "titre": "Rénovation de toiture",
+    "dossier": "/images/renovation/",
+    "prefixe": "renovation-de-toiture-yvelines-",
+    "nombre": 34,
+    "exclusions": [],
+    "alt": "Rénovation de toiture dans les Yvelines par David Adnot"
+  },
+  {
+    "cle": "tuiles",
+    "titre": "Pose de tuiles",
+    "dossier": "/images/tuiles/",
+    "prefixe": "pose-de-tuiles-couvreur-yvelines-",
+    "nombre": 11,
+    "exclusions": [],
+    "alt": "Pose de tuiles par un couvreur dans les Yvelines"
+  },
+  {
+    "cle": "faitage",
+    "titre": "Faîtage et arêtiers",
+    "dossier": "/images/faitage/",
+    "prefixe": "faitage-aretier-toiture-yvelines-",
+    "nombre": 25,
+    "exclusions": [18],
+    "alt": "Réfection de faîtage et d'arêtiers de toiture dans les Yvelines"
+  },
+  {
+    "cle": "zinguerie",
+    "titre": "Zinguerie et gouttières",
+    "dossier": "/images/zinguerie/",
+    "prefixe": "zinguerie-gouttiere-couvreur-yvelines-",
+    "nombre": 35,
+    "exclusions": [],
+    "alt": "Travaux de zinguerie et pose de gouttières dans les Yvelines"
+  },
+  {
+    "cle": "velux",
+    "titre": "Fenêtres de toit Velux",
+    "dossier": "/images/velux/",
+    "prefixe": "pose-fenetre-de-toit-velux-yvelines-",
+    "nombre": 5,
+    "exclusions": [],
+    "alt": "Pose de fenêtre de toit Velux dans les Yvelines"
+  },
+  {
+    "cle": "nettoyage",
+    "titre": "Nettoyage et démoussage",
+    "dossier": "/images/nettoyage/",
+    "prefixe": "nettoyage-demoussage-toiture-yvelines-",
+    "nombre": 27,
+    "exclusions": [],
+    "alt": "Nettoyage et démoussage de toiture dans les Yvelines"
+  },
+  {
+    "cle": "etancheite",
+    "titre": "Étanchéité toit-terrasse",
+    "dossier": "/images/etancheite/",
+    "prefixe": "etancheite-toit-terrasse-yvelines-",
+    "nombre": 2,
+    "exclusions": [],
+    "alt": "Étanchéité de toit-terrasse dans les Yvelines"
+  },
+  {
+    "cle": "isolation",
+    "titre": "Isolation des combles",
+    "dossier": "/images/isolation/",
+    "prefixe": "isolation-amenagement-combles-yvelines-",
+    "nombre": 3,
+    "exclusions": [],
+    "alt": "Isolation et aménagement de combles dans les Yvelines"
+  },
+  {
+    "cle": "ravalement",
+    "titre": "Ravalement de façade",
+    "dossier": "/images/ravalement/",
+    "prefixe": "ravalement-de-facade-yvelines-",
+    "nombre": 11,
+    "exclusions": [],
+    "alt": "Ravalement de façade dans les Yvelines"
+  },
+  {
+    "cle": "toitures",
+    "titre": "Toitures terminées",
+    "dossier": "/images/toitures/",
+    "prefixe": "toiture-renovee-couvreur-yvelines-",
+    "nombre": 29,
+    "exclusions": [],
+    "alt": "Toiture rénovée par un couvreur dans les Yvelines"
+  },
+  {
+    "cle": "chantiers",
+    "titre": "Chantiers en cours",
+    "dossier": "/images/chantiers/",
+    "prefixe": "chantier-couverture-rambouillet-yvelines-",
+    "nombre": 37,
+    "exclusions": [],
+    "alt": "Chantier de couverture autour de Rambouillet dans les Yvelines"
+  }
+]

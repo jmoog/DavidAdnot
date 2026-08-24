@@ -1,0 +1,311 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FilAriane from '../components/FilAriane.astro';
+import reviews from '../data/reviews.json';
+
+// Rendu à la demande pour lire la clé publique Turnstile depuis l'environnement
+export const prerender = false;
+const turnstileSiteKey = process.env.TURNSTILE_SITE_KEY || '';
+
+const title = 'Contact | David Adnot - Artisan Couvreur dans les Yvelines';
+const description = 'Contactez David Adnot pour un devis gratuit. Artisan couvreur intervenant pour tous travaux de toiture et zinguerie dans les Yvelines. Tél. 06 60 49 14 30.';
+
+const prestations = [
+  { value: 'renovation-toiture',     label: 'Rénovation / remplacement de toiture' },
+  { value: 'reparation-toiture',     label: 'Réparation de toiture' },
+  { value: 'recherche-fuite',        label: 'Recherche de fuite & infiltrations' },
+  { value: 'nettoyage-demoussage',   label: 'Nettoyage et démoussage' },
+  { value: 'application-traitement', label: 'Application de traitement (hydrofuge / anti-mousse)' },
+  { value: 'zinguerie',              label: 'Zinguerie (noues, abergements, chéneaux)' },
+  { value: 'gouttieres',             label: 'Pose ou remplacement de gouttières' },
+  { value: 'velux-fenetre-de-toit',  label: 'Pose ou remplacement de Velux' },
+  { value: 'isolation-toiture',      label: 'Isolation de toiture' },
+  { value: 'autre',                  label: 'Autre / à préciser' },
+];
+
+const avisDevis = reviews.avis.slice(0, 3); // 3 avis 5 étoiles en réassurance
+---
+<BaseLayout title={title} description={description}>
+  <!-- ── Accroche + formulaire ────────────────────────────────── -->
+  <section class="section devis">
+    <div class="conteneur devis__grille">
+
+      <div class="devis__texte">
+        <FilAriane items={[{ label: 'Accueil', href: '/' }, { label: 'Devis gratuit et contact' }]} />
+        <h1>Devis gratuit pour vos travaux de toiture 78</h1>
+        <p class="devis__sous-titre">David Adnot — Artisan couvreur à Rambouillet</p>
+        <p>
+          Remplissez le formulaire et recevez votre devis gratuit et sans aucun engagement de la
+          part de votre couvreur à Rambouillet. Je me déplace chez vous pour évaluer le chantier
+          avant de vous remettre une proposition chiffrée claire, détaillant les matériaux
+          préconisés, les méthodes de travail et les coûts associés, sans aucune surprise.
+        </p>
+        <ul class="devis__points">
+          <li>Devis détaillé poste par poste, après visite sur place</li>
+          <li>Réponse rapide, urgences traitées</li>
+          <li>Garantie décennale et responsabilité civile professionnelle</li>
+          <li>Paiement en 3 ou 4 fois possible</li>
+        </ul>
+
+        <ul class="devis__coordonnees">
+          <li>
+            <svg class="icone" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/></svg>
+            <a href="tel:0660491430"><strong>06 60 49 14 30</strong></a>
+          </li>
+          <li>
+            <svg class="icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:contact@adnot-couvreur.fr">contact@adnot-couvreur.fr</a>
+          </li>
+          <li>
+            <svg class="icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Zone Industrielle le Pâtis, 4 Rue Paul Démange, 78120 Rambouillet
+          </li>
+        </ul>
+
+        <img
+          class="devis__photo"
+          src="/images/equipe/david-adnot-couvreur-rambouillet-01.webp"
+          alt="Chantier David Adnot Artisan Couvreur avec échafaudage et bâche de chantier"
+          loading="lazy"
+          width="1200"
+          height="900"
+        />
+      </div>
+
+      <div class="carte devis__formulaire">
+        <h2>Décrivez votre besoin</h2>
+        <p class="devis__formulaire-intro">Quelques questions rapides pour vous rappeler avec un premier diagnostic.</p>
+
+        {turnstileSiteKey && (
+          <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer is:inline></script>
+        )}
+
+        <form id="devis-form" name="devis" method="POST" action="/api/devis/">
+          <!-- Honeypot anti-spam (champ caché qui doit rester vide) -->
+          <p class="hp" aria-hidden="true">
+            <label>Ne pas remplir <input name="website" tabindex="-1" autocomplete="off" /></label>
+          </p>
+          <!-- Time-trap anti-bot : horodatage du chargement, rempli en JS -->
+          <input type="hidden" name="ts" id="f-ts" value="" />
+
+          <div class="champ">
+            <label for="f-nom">Votre nom</label>
+            <input id="f-nom" type="text" name="nom" required autocomplete="name" placeholder="Ex. Marie Dupont" />
+          </div>
+
+          <div class="champ champ--duo">
+            <div>
+              <label for="f-tel">Téléphone</label>
+              <input id="f-tel" type="tel" name="tel" required autocomplete="tel" placeholder="Ex. 06 11 22 33 44" />
+            </div>
+            <div>
+              <label for="f-email">Votre email</label>
+              <input id="f-email" type="email" name="email" required autocomplete="email" placeholder="marie.dupont@email.fr" />
+            </div>
+          </div>
+
+          <div class="champ">
+            <label for="f-ville">Ville du chantier</label>
+            <input id="f-ville" type="text" name="ville" required placeholder="Rambouillet, Saint-Arnoult, Sonchamp…" />
+          </div>
+
+          <div class="champ">
+            <label for="f-prestation">Type d'intervention</label>
+            <select id="f-prestation" name="prestation" required>
+              <option value="">— Sélectionnez une prestation —</option>
+              {prestations.map((p) => (
+                <option value={p.value}>{p.label}</option>
+              ))}
+            </select>
+          </div>
+
+          <div class="champ">
+            <label for="f-message">Précisez votre demande</label>
+            <textarea id="f-message" name="message" rows="4" placeholder="Tuiles à remplacer, gouttière qui déborde, infiltration près d'une cheminée, projet de Velux…"></textarea>
+          </div>
+
+          {turnstileSiteKey && (
+            <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light" data-language="fr"></div>
+          )}
+
+          <button type="submit" id="devis-submit" class="btn btn--rouge devis__envoyer">
+            Envoyer ma demande de devis
+          </button>
+          <p class="devis__rgpd">
+            En cliquant sur « Envoyer ma demande » vous consentez au traitement de vos
+            informations personnelles pour le traitement de votre demande de devis
+            (<a href="/politique-de-confidentialite/">politique de confidentialité</a>).
+          </p>
+          <p id="devis-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Avis (réassurance) ───────────────────────────────────── -->
+  <section class="section section--gris">
+    <div class="conteneur">
+      <h2>Les avis de mes clients dans les Yvelines</h2>
+      <div class="grille-avis">
+        {avisDevis.map((a) => (
+          <article class="carte avis">
+            <div class="avis__entete">
+              <span class="avis__nom">{a.auteur}</span>
+              <span class="avis__date">{a.date}</span>
+            </div>
+            <span class="avis__etoiles" aria-label={`${a.note} étoiles sur 5`}>{'★'.repeat(a.note)}{'☆'.repeat(5 - a.note)}</span>
+            <p>{a.texte}</p>
+          </article>
+        ))}
+      </div>
+      <p class="note-google">
+        <span class="avis__etoiles" aria-hidden="true">★★★★★</span>
+        <strong>{reviews.note.toLocaleString('fr-FR')}/5</strong> · {reviews.nombre} avis Google ·
+        <a href={reviews.urlFiche} rel="noopener" target="_blank">Voir tous les avis sur Google</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Contenu éditorial ────────────────────────────────────── -->
+  <section class="section">
+    <div class="conteneur duo">
+      <div>
+        <h2>Pourquoi faire confiance à David Adnot pour votre toiture ?</h2>
+        <p>
+          Avec une solide expérience dans le métier, je suis votre spécialiste privilégié à
+          Rambouillet pour tous les travaux liés à la couverture et à la zinguerie. Maîtrisant
+          les techniques les plus exigeantes et travaillant avec des matériaux variés, je
+          m'engage à garantir la longévité et la performance de votre toit.
+        </p>
+        <h3>Rénovation complète de toiture</h3>
+        <p>
+          Des solutions esthétiques et robustes avec des matériaux de premier choix, comme les
+          tuiles en terre cuite à double emboîtement ou les ardoises naturelles et fibro-ciment,
+          posées selon les règles de l'art pour une étanchéité parfaite.
+        </p>
+        <h3>Zinguerie et isolation</h3>
+        <p>
+          Mon expertise s'étend aux projets complexes : remise à neuf des éléments de zinguerie,
+          systèmes de sous-toiture ventilée et solutions d'isolation thermique performantes pour
+          améliorer votre confort et réduire vos factures d'énergie.
+        </p>
+        <h3>Paiement en 3 ou 4 fois possible</h3>
+        <p>
+          Pour faciliter la vie de mes clients face à l'augmentation des coûts, je propose des
+          paiements en plusieurs fois : vous pouvez ainsi faire face plus facilement à un imprévu
+          et prendre soin de votre toiture.
+        </p>
+      </div>
+      <img
+        src="/images/equipe/david-adnot-couvreur-rambouillet-04.webp"
+        alt="Véhicule et chantier David Adnot Artisan Couvreur dans les Yvelines"
+        loading="lazy"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .devis__grille { display: grid; gap: 3rem; align-items: start; }
+  @media (min-width: 980px) {
+    .devis__grille { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  }
+  .devis__sous-titre { font-size: 1.1rem; color: var(--gris-700); font-weight: 600; margin-block: 0.8rem 1rem; }
+  .devis__points { list-style: none; padding: 0; margin-block: 1.2rem; display: grid; gap: 0.5rem; }
+  .devis__points li { padding-left: 1.6em; position: relative; }
+  .devis__points li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--rouge);
+    font-weight: 800;
+  }
+  .devis__coordonnees { list-style: none; padding: 0; margin-top: 1.6rem; display: grid; gap: 0.6rem; }
+  .devis__coordonnees li { display: flex; align-items: center; gap: 0.6em; }
+  .devis__coordonnees .icone { color: var(--bleu); flex-shrink: 0; }
+  .devis__photo {
+    margin-top: 2rem;
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre-forte);
+    width: 100%;
+    object-fit: cover;
+  }
+
+  /* Formulaire */
+  .devis__formulaire { padding: 2rem; }
+  .devis__formulaire:hover { transform: none; }
+  .devis__formulaire h2 { font-size: 1.3rem; }
+  .devis__formulaire-intro { color: var(--gris-500); font-size: 0.92rem; margin-block: 0.3rem 1.5rem; }
+  .hp { position: absolute; left: -9999px; }
+  .champ { margin-bottom: 1.1rem; }
+  .champ--duo { display: grid; gap: 1.1rem; }
+  @media (min-width: 560px) { .champ--duo { grid-template-columns: 1fr 1fr; } }
+  .champ label { display: block; font-weight: 600; font-size: 0.92rem; margin-bottom: 0.35rem; color: var(--gris-700); }
+  .champ input,
+  .champ select,
+  .champ textarea {
+    width: 100%;
+    padding: 0.7em 1em;
+    border: 1px solid var(--gris-200);
+    border-radius: var(--rayon);
+    font: inherit;
+    font-size: 0.97rem;
+    color: var(--noir);
+    background: var(--blanc);
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+  .champ input:focus,
+  .champ select:focus,
+  .champ textarea:focus {
+    outline: none;
+    border-color: var(--bleu-clair);
+    box-shadow: 0 0 0 3px rgba(33, 121, 223, 0.18);
+  }
+  .champ textarea { resize: vertical; min-height: 110px; }
+  .cf-turnstile { margin-bottom: 1.1rem; }
+  .devis__envoyer { width: 100%; }
+  .devis__envoyer:disabled { opacity: 0.5; cursor: not-allowed; }
+  .devis__rgpd { font-size: 0.8rem; color: var(--gris-500); margin-top: 0.8rem; }
+  #devis-status { font-size: 0.92rem; margin-top: 0.8rem; }
+</style>
+
+<script is:inline>
+(function () {
+  var form = document.getElementById('devis-form');
+  if (!form) return;
+  var status = document.getElementById('devis-status');
+  var submit = document.getElementById('devis-submit');
+  var tsField = document.getElementById('f-ts');
+  if (tsField) tsField.value = String(Date.now());
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    submit.disabled = true;
+    status.style.color = '';
+    status.textContent = 'Envoi en cours…';
+    try {
+      var fd = new FormData(form);
+      var payload = {};
+      fd.forEach(function (v, k) { payload[k] = v; });
+      var res = await fetch('/api/devis/', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'accept': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      var data = await res.json().catch(function () { return {}; });
+      if (res.ok && data.ok) {
+        window.location.href = '/merci/';
+        return;
+      }
+      status.style.color = '#c0392b';
+      status.textContent = data.error || 'Une erreur est survenue. Merci de réessayer ou de nous appeler au 06 60 49 14 30.';
+      submit.disabled = false;
+    } catch (err) {
+      status.style.color = '#c0392b';
+      status.textContent = 'Erreur réseau. Merci de réessayer ou de nous appeler au 06 60 49 14 30.';
+      submit.disabled = false;
+    }
+  });
+})();
+</script>

@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroPage from '../components/HeroPage.astro';
+import AvisCarrousel from '../components/AvisCarrousel.astro';
+import CtaDevis from '../components/CtaDevis.astro';
+
+const title = 'Isolation de toiture et combles en Yvelines (78) — Devis';
+const description = "David Adnot isole vos combles et rampants dans les Yvelines : moins de déperditions, plus de confort été comme hiver. Conseil et chiffrage gratuits.";
+
+const extraSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Isolation de toiture',
+    serviceType: 'Isolation thermique de toiture et de combles',
+    provider: { '@id': 'https://www.adnot-couvreur.fr/#localbusiness' },
+    areaServed: { '@type': 'AdministrativeArea', name: 'Yvelines (78) — Rambouillet' },
+    url: 'https://www.adnot-couvreur.fr/isolation-toiture/',
+    description,
+  },
+];
+---
+<BaseLayout title={title} description={description} extraSchemas={extraSchemas}>
+  <HeroPage
+    h1="Isoler vos combles et rampants pour un meilleur confort"
+    image="/images/isolation/isolation-amenagement-combles-yvelines-02.webp"
+    imageAlt="Isolation de combles sous toiture réalisée par David Adnot dans les Yvelines"
+    ariane="Isolation de toiture"
+  >
+    <p class="hero__accroche">
+      Une maison difficile à chauffer l'hiver, étouffante l'été ? Le toit est le premier poste de
+      déperdition thermique d'une habitation. J'améliore l'isolation de vos combles et de vos
+      rampants avec des solutions adaptées à votre charpente et à votre budget.
+    </p>
+    <ul>
+      <li><strong>Isolation des combles perdus</strong> ou aménagés.</li>
+      <li><strong>Panneaux isolants et laine minérale</strong> posés dans les règles de l'art.</li>
+      <li><strong>Ventilation préservée</strong> pour une charpente saine.</li>
+    </ul>
+  </HeroPage>
+
+  <AvisCarrousel ordre={4} />
+
+  <!-- ── Pourquoi isoler ──────────────────────────────────────── -->
+  <section class="section">
+    <div class="conteneur duo">
+      <div>
+        <h2>Ce que change une toiture bien isolée</h2>
+        <p>
+          L'air chaud monte : mal isolée, la toiture laisse filer une part importante de votre
+          chauffage. Une isolation performante des combles réduit la facture d'énergie, améliore
+          le confort été comme hiver et valorise votre maison lors d'une revente.
+        </p>
+        <p>
+          Selon la configuration — combles perdus ou aménagés, hauteur disponible, état de la
+          charpente — je vous oriente vers la solution la plus efficace : laine de roche ou de
+          verre entre et sous chevrons, panneaux isolants performants pour les rampants, avec
+          pare-vapeur et lame d'air de ventilation pour préserver la structure.
+        </p>
+        <p>
+          Si votre couverture doit être refaite, le plus rationnel est de coupler l'isolation à
+          la <a href="/renovation-toiture/">rénovation de la toiture</a> : le chantier est
+          mutualisé et le résultat optimal.
+        </p>
+      </div>
+      <img
+        src="/images/isolation/isolation-amenagement-combles-yvelines-01.webp"
+        alt="Aménagement et isolation de combles avec charpente apparente dans les Yvelines"
+        loading="lazy"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </section>
+
+  <!-- ── Méthode ──────────────────────────────────────────────── -->
+  <section class="section section--bleute">
+    <div class="conteneur">
+      <h2>Ma méthode pour une isolation durable</h2>
+      <div class="etapes">
+        <div class="etape">
+          <span class="etape__numero">01</span>
+          <h3>Visite et diagnostic</h3>
+          <p>
+            J'examine les combles, la charpente et la couverture : inutile d'isoler sous un toit
+            qui fuit. Les éventuelles réparations sont chiffrées en amont.
+          </p>
+        </div>
+        <div class="etape">
+          <span class="etape__numero">02</span>
+          <h3>Choix de l'isolant</h3>
+          <p>
+            Épaisseur, résistance thermique, comportement à l'humidité : je sélectionne l'isolant
+            adapté à votre configuration et aux performances recherchées.
+          </p>
+        </div>
+        <div class="etape">
+          <span class="etape__numero">03</span>
+          <h3>Pose et étanchéité à l'air</h3>
+          <p>
+            Pose continue sans pont thermique, pare-vapeur soigneusement jointoyé et lame d'air
+            ventilée sous la couverture pour évacuer l'humidité.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RGE note ─────────────────────────────────────────────── -->
+  <section class="section section--gris">
+    <div class="conteneur">
+      <h2>Certification RGE et aides financières</h2>
+      <p>
+        La certification RGE n'est pas obligatoire pour exercer le métier de couvreur : un
+        artisan compétent justifie avant tout de son savoir-faire, de son expérience et de sa
+        garantie décennale. Elle est principalement nécessaire si vous sollicitez des aides
+        financières spécifiques pour des travaux d'isolation. Je privilégie, pour ma part,
+        l'expertise de terrain et la maîtrise technique — et je vous dis honnêtement, dès la
+        visite, ce qui relève de mon périmètre.
+      </p>
+    </div>
+  </section>
+
+  <CtaDevis />
+</BaseLayout>

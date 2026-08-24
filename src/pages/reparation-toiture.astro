@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroPage from '../components/HeroPage.astro';
+import AvisCarrousel from '../components/AvisCarrousel.astro';
+import CtaDevis from '../components/CtaDevis.astro';
+
+const title = 'Réparation de toiture dans les Yvelines (78) — Devis gratuit';
+const description = "Tuile cassée, fuite, faîtage descellé ? David Adnot intervient rapidement autour de Rambouillet pour remettre votre toit hors d'eau. Garantie décennale.";
+
+const extraSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Réparation de toiture',
+    serviceType: 'Réparation de toiture',
+    provider: { '@id': 'https://www.adnot-couvreur.fr/#localbusiness' },
+    areaServed: { '@type': 'AdministrativeArea', name: 'Yvelines (78) — Rambouillet' },
+    url: 'https://www.adnot-couvreur.fr/reparation-toiture/',
+    description,
+  },
+];
+---
+<BaseLayout title={title} description={description} extraSchemas={extraSchemas}>
+  <HeroPage
+    h1="Réparer votre toit : tuiles cassées, fuites et faîtage"
+    image="/images/faitage/faitage-aretier-toiture-yvelines-01.webp"
+    imageAlt="Réparation d'un faîtage de toiture en tuiles par David Adnot dans les Yvelines"
+    ariane="Réparation de toiture"
+  >
+    <p class="hero__accroche">
+      Des tuiles déplacées après un coup de vent, une trace d'humidité au plafond, un faîtage qui
+      s'effrite ? J'interviens dans tout le secteur de Rambouillet pour réparer les dommages
+      ponctuels avant qu'ils ne deviennent des dégâts coûteux.
+    </p>
+    <ul>
+      <li><strong>Remplacement</strong> de tuiles ou d'ardoises cassées.</li>
+      <li><strong>Colmatage de fuites</strong> localisées et reprise des points singuliers.</li>
+      <li><strong>Réfection des solins et faîtages</strong> dégradés.</li>
+    </ul>
+  </HeroPage>
+
+  <AvisCarrousel tag="reparation" ordre={1} />
+
+  <!-- ── Pourquoi réparer vite ────────────────────────────────── -->
+  <section class="section">
+    <div class="conteneur duo">
+      <div>
+        <h2>Une intervention rapide préserve votre maison</h2>
+        <p>
+          Une tuile cassée ou un solin fatigué laisse passer l'eau discrètement. Avec le temps,
+          l'humidité attaque le liteaunage, la charpente et les plafonds : ce qui aurait coûté le
+          prix d'une réparation ponctuelle finit en chantier lourd. Une intervention réalisée en
+          temps utile préserve l'étanchéité de votre maison et évite l'apparition de désordres
+          sur la structure.
+        </p>
+        <p>
+          Après un diagnostic sur le toit, je remplace les éléments hors service — tuiles,
+          ardoises, closoirs — je rescelle ou je refais le faîtage, et je reprends au zinc les
+          solins de raccord avec les souches de cheminée et les murs. En cas de sinistre
+          important, je peux mettre la toiture hors d'eau en attendant la réparation définitive.
+        </p>
+        <p>
+          Si l'origine de l'infiltration n'est pas évidente, je mène une
+          <a href="/recherche-de-fuites/">recherche de fuite</a> méthodique avant toute
+          réparation, pour traiter la cause et pas seulement le symptôme.
+        </p>
+      </div>
+      <img
+        src="/images/faitage/faitage-aretier-toiture-yvelines-03.webp"
+        alt="Réfection d'arêtiers et remplacement de tuiles sur une toiture dans les Yvelines"
+        loading="lazy"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </section>
+
+  <!-- ── Ce que je répare ─────────────────────────────────────── -->
+  <section class="section section--bleute">
+    <div class="conteneur">
+      <h2>Les réparations les plus courantes que je prends en charge</h2>
+      <div class="etapes">
+        <div class="etape">
+          <span class="etape__numero">01</span>
+          <h3>Tuiles et ardoises cassées</h3>
+          <p>
+            Remplacement à l'identique des éléments gélifs, fissurés ou déplacés, dans le respect
+            du sens de pose et de l'aspect d'origine de la couverture.
+          </p>
+        </div>
+        <div class="etape">
+          <span class="etape__numero">02</span>
+          <h3>Faîtages et arêtiers</h3>
+          <p>
+            Rescellement ou réfection complète des faîtages maçonnés et des arêtiers, pose de
+            closoirs ventilés lorsque la couverture s'y prête.
+          </p>
+        </div>
+        <div class="etape">
+          <span class="etape__numero">03</span>
+          <h3>Solins et abergements</h3>
+          <p>
+            Reprise au zinc des raccords avec les cheminées, murs et fenêtres de toit — les
+            points d'entrée d'eau les plus fréquents sur une toiture.
+          </p>
+        </div>
+        <div class="etape">
+          <span class="etape__numero">04</span>
+          <h3>Gouttières et évacuations</h3>
+          <p>
+            Remise en état des <a href="/zinguerie-gouttieres/">gouttières et descentes</a> qui
+            débordent ou fuient, pour que l'eau de pluie reparte là où elle doit aller.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Réassurance ──────────────────────────────────────────── -->
+  <section class="section section--gris">
+    <div class="conteneur">
+      <h2>Un diagnostic honnête avant toute réparation</h2>
+      <p>
+        Je monte sur le toit, je constate, et je vous explique ce que je vois : parfois quelques
+        tuiles suffisent, parfois la couverture arrive en fin de vie et une
+        <a href="/renovation-toiture/">rénovation complète</a> est plus raisonnable qu'une série
+        de réparations. Dans tous les cas, vous recevez un devis clair, détaillé, gratuit et sans
+        engagement — et mes travaux sont couverts par la garantie décennale.
+      </p>
+    </div>
+  </section>
+
+  <CtaDevis />
+</BaseLayout>

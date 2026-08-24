@@ -1,0 +1,135 @@
+---
+// Carrousel d'avis Google — scroll-snap natif + flèches, sans dépendance.
+// Prop optionnelle `tag` : les avis portant ce tag passent en tête du
+// carrousel (ex. tag="nettoyage" sur la page nettoyage-démoussage).
+import reviews from '../data/reviews.json';
+
+export interface Props {
+  tag?: string;
+  /** Lieu affiché dans le titre (ex. « dans les Yvelines ») */
+  lieu?: string;
+  /** Décalage de rotation des avis, pour varier l'ordre d'une page à l'autre */
+  ordre?: number;
+}
+const { tag, lieu = 'dans les Yvelines', ordre = 0 } = Astro.props;
+
+// Rotation des avis selon `ordre` : chaque page affiche les avis dans un ordre différent
+const base = reviews.avis;
+const n = base.length;
+const decalage = ((ordre % n) + n) % n;
+const avisDecales = decalage ? [...base.slice(decalage), ...base.slice(0, decalage)] : base;
+
+const avisTries = tag
+  ? [...avisDecales].sort((a, b) => {
+      const aMatch = (a.tags || []).includes(tag) ? 0 : 1;
+      const bMatch = (b.tags || []).includes(tag) ? 0 : 1;
+      return aMatch - bMatch;
+    })
+  : avisDecales;
+---
+<section class="section section--gris avis-carrousel">
+  <div class="conteneur">
+    <h2>Les avis de mes clients {lieu}</h2>
+    <p class="note-google">
+      <span class="avis__etoiles" aria-hidden="true">★★★★★</span>
+      <strong>{reviews.note.toLocaleString('fr-FR')}/5</strong> · {reviews.nombre} avis Google ·
+      <a href={reviews.urlFiche} rel="noopener" target="_blank">Voir tous les avis sur Google</a>
+    </p>
+
+    <div class="carrousel">
+      <button class="carrousel__fleche carrousel__fleche--prec" type="button" aria-label="Avis précédents">
+        <svg class="icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+
+      <ul class="carrousel__piste" aria-label="Avis de clients">
+        {avisTries.map((a) => (
+          <li class="carte avis carrousel__item">
+            <div class="avis__entete">
+              <span class="avis__nom">{a.auteur}</span>
+              <span class="avis__date">{a.date}</span>
+            </div>
+            <span class="avis__etoiles" aria-label={`${a.note} étoiles sur 5`}>{'★'.repeat(a.note)}{'☆'.repeat(5 - a.note)}</span>
+            <p>{a.texte}</p>
+          </li>
+        ))}
+      </ul>
+
+      <button class="carrousel__fleche carrousel__fleche--suiv" type="button" aria-label="Avis suivants">
+        <svg class="icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .carrousel {
+    position: relative;
+    margin-top: 2rem;
+    display: flex;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .carrousel__piste {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0.25rem 1.2rem;
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+  }
+  .carrousel__item {
+    flex: 0 0 min(340px, 82vw);
+    scroll-snap-align: start;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .carrousel__item:hover { transform: none; }
+  .carrousel__item p { font-size: 0.95rem; color: var(--gris-700); }
+
+  /* Barre de défilement discrète */
+  .carrousel__piste::-webkit-scrollbar { height: 6px; }
+  .carrousel__piste::-webkit-scrollbar-thumb { background: var(--gris-200); border-radius: 3px; }
+  .carrousel__piste { scrollbar-width: thin; scrollbar-color: var(--gris-200) transparent; }
+
+  .carrousel__fleche {
+    align-self: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--gris-200);
+    background: var(--blanc);
+    color: var(--bleu);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--ombre);
+    transition: background var(--transition), color var(--transition);
+  }
+  .carrousel__fleche:hover { background: var(--rouge); color: var(--blanc); border-color: var(--rouge); }
+  .carrousel__fleche .icone { width: 1.3rem; height: 1.3rem; }
+
+  @media (max-width: 700px) {
+    .carrousel__fleche { display: none; } /* au doigt sur mobile */
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.avis-carrousel .carrousel').forEach((c) => {
+    const piste = c.querySelector('.carrousel__piste');
+    if (!piste) return;
+    const pas = () => {
+      const item = piste.querySelector('.carrousel__item');
+      return item ? item.getBoundingClientRect().width + 20 : 360;
+    };
+    c.querySelector('.carrousel__fleche--prec')?.addEventListener('click', () => piste.scrollBy({ left: -pas(), behavior: 'smooth' }));
+    c.querySelector('.carrousel__fleche--suiv')?.addEventListener('click', () => piste.scrollBy({ left: pas(), behavior: 'smooth' }));
+  });
+</script>

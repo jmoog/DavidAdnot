@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroPage from '../components/HeroPage.astro';
+import AvisCarrousel from '../components/AvisCarrousel.astro';
+import CtaDevis from '../components/CtaDevis.astro';
+
+const title = 'Rénovation de toiture dans les Yvelines — David Adnot';
+const description = "Couverture ancienne, tuiles poreuses ? Je dépose, contrôle la charpente et pose une couverture neuve, tuile ou ardoise. Devis gratuit, +20 ans d'expérience.";
+
+const extraSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Rénovation de toiture',
+    serviceType: 'Rénovation et remplacement de toiture',
+    provider: { '@id': 'https://www.adnot-couvreur.fr/#localbusiness' },
+    areaServed: { '@type': 'AdministrativeArea', name: 'Yvelines (78) — Rambouillet' },
+    url: 'https://www.adnot-couvreur.fr/renovation-toiture/',
+    description,
+  },
+];
+---
+<BaseLayout title={title} description={description} extraSchemas={extraSchemas}>
+  <HeroPage
+    h1="Refaire entièrement votre toit à Rambouillet et dans le 78"
+    image="/images/renovation/renovation-de-toiture-yvelines-05.webp"
+    imageAlt="Rénovation complète d'une toiture en tuiles sur échafaudage dans les Yvelines"
+    ariane="Rénovation de toiture"
+  >
+    <p class="hero__accroche">
+      Votre toiture est ancienne, fatiguée ou présente des signes généralisés de vétusté ? Je
+      vous accompagne dans son remplacement complet : du détuilage au retrait de l'ancien écran,
+      jusqu'à la pose d'une couverture neuve et performante.
+    </p>
+    <ul>
+      <li><strong>Tous matériaux</strong> : tuile, ardoise, zinc, bac acier.</li>
+      <li><strong>Écran de sous-toiture</strong> et ventilation conformes aux DTU.</li>
+      <li><strong>Zinguerie refaite</strong> dans la foulée : noues, solins, faîtage.</li>
+    </ul>
+  </HeroPage>
+
+  <AvisCarrousel tag="renovation" ordre={2} />
+
+  <!-- ── Quand rénover ────────────────────────────────────────── -->
+  <section class="section">
+    <div class="conteneur duo">
+      <div>
+        <h2>Quand la rénovation complète devient le bon choix</h2>
+        <p>
+          Une couverture dont les tuiles sont poreuses ou gélives, un écran de sous-toiture
+          absent, des infiltrations répétées malgré les réparations : à ce stade, le coup par
+          coup ne suffit plus. La rénovation complète permet de repartir sur une toiture saine,
+          étanche et isolée, conçue pour durer des décennies.
+        </p>
+        <p>
+          C'est aussi le moment idéal pour améliorer votre confort : toiture ouverte, on peut
+          renforcer l'<a href="/isolation-toiture/">isolation des combles ou des rampants</a> et
+          intégrer des <a href="/pose-de-velux/">fenêtres de toit</a> sans surcoût de dépose.
+        </p>
+        <p>
+          Je maîtrise les matériaux utilisés dans notre région — tuile terre cuite, ardoise
+          naturelle ou fibro-ciment, zinc — et les contraintes du Parc Naturel de la Haute Vallée
+          de Chevreuse, où les teintes et matériaux admis sont souvent encadrés par le PLU.
+        </p>
+      </div>
+      <img
+        src="/images/renovation/renovation-de-toiture-yvelines-11.webp"
+        alt="Pose d'une couverture neuve en tuiles sur liteaunage dans les Yvelines"
+        loading="lazy"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </section>
+
+  <!-- ── Étapes ───────────────────────────────────────────────── -->
+  <section class="section section--bleute">
+    <div class="conteneur">
+      <h2>Les étapes de votre rénovation de toiture</h2>
+      <div class="etapes">
+        <div class="etape">
+          <span class="etape__numero">01</span>
+          <h3>Diagnostic et devis</h3>
+          <p>
+            Inspection de la charpente et de la couverture, puis devis détaillé : prestations,
+            matériaux sélectionnés et phasage des opérations. Ce document contractualise le
+            projet et son budget.
+          </p>
+        </div>
+        <div class="etape">
+          <span class="etape__numero">02</span>
+          <h3>Dépose et contrôle du support</h3>
+          <p>
+            Retrait des éléments existants et évacuation. Cette phase permet un contrôle complet
+            de la charpente et les renforcements structurels si son état le nécessite.
+          </p>
+        </div>
+        <div class="etape">
+          <span class="etape__numero">03</span>
+          <h3>Écran, ventilation et couverture</h3>
+          <p>
+            Écran de sous-toiture haute perméabilité, lattage et contre-lattage conformes aux
+            DTU, puis pose du matériau retenu selon les préconisations du fabricant.
+          </p>
+        </div>
+        <div class="etape">
+          <span class="etape__numero">04</span>
+          <h3>Zinguerie et réception</h3>
+          <p>
+            Gouttières, chéneaux, faîtages et solins sont façonnés et posés. Le chantier est
+            nettoyé, une visite de réception valide la conformité et je vous remets les
+            attestations de garantie.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Durée et budget ──────────────────────────────────────── -->
+  <section class="section section--gris">
+    <div class="conteneur">
+      <h2>Durée, budget et facilités de paiement</h2>
+      <p>
+        Pour une maison individuelle, comptez généralement entre 2 et 4 semaines selon la
+        surface, la complexité de la structure et la météo — un planning détaillé vous est fourni
+        dans le devis. Pour faciliter la vie de mes clients, je propose le
+        <strong>paiement en 3 ou 4 fois</strong> : vous pouvez prendre soin de votre toiture sans
+        déséquilibrer votre budget.
+      </p>
+    </div>
+  </section>
+
+  <CtaDevis />
+</BaseLayout>

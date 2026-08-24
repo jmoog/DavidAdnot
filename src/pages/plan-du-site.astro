@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FilAriane from '../components/FilAriane.astro';
+import services from '../data/services.json';
+import villes from '../data/villes.json';
+
+const title = 'Plan du site — David Adnot, couvreur dans les Yvelines';
+const description = "Toutes les pages du site de votre artisan couvreur dans les Yvelines : services de toiture, zone d'intervention, devis gratuit.";
+
+const pagesPrincipales = [
+  { label: 'Accueil — Couvreur dans les Yvelines', href: '/' },
+  { label: 'À propos de M. Adnot, artisan couvreur', href: '/a-propos-de-m-adnot-artisan-couvreur/' },
+  { label: 'Toutes mes prestations', href: '/services-adnot-couvreur/' },
+  { label: 'Galerie photo de mes chantiers', href: '/galerie-photo/' },
+  { label: 'Devis gratuit et contact', href: '/contact/' },
+];
+
+const pagesLegales = [
+  { label: 'Mentions légales', href: '/mentions-legales/' },
+  { label: 'Politique de confidentialité', href: '/politique-de-confidentialite/' },
+  { label: 'Plan du site', href: '/plan-du-site/' },
+];
+---
+<BaseLayout title={title} description={description}>
+  <section class="section">
+    <div class="conteneur">
+      <FilAriane items={[{ label: 'Accueil', href: '/' }, { label: 'Plan du site' }]} />
+      <h1>Plan du site</h1>
+      <p class="plan__intro">
+        Retrouvez ici l'ensemble des pages du site de David Adnot, artisan couvreur à
+        Rambouillet, dans les Yvelines.
+      </p>
+
+      <div class="plan__grille">
+        <section class="plan__bloc">
+          <h2>Pages principales</h2>
+          <ul>
+            {pagesPrincipales.map((p) => (
+              <li><a href={p.href}>{p.label}</a></li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="plan__bloc">
+          <h2>Mes prestations</h2>
+          <ul>
+            {services.map((s) => (
+              <li><a href={`/${s.slug}/`}>{s.label}</a></li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="plan__bloc">
+          <h2>Zone d'intervention</h2>
+          <ul>
+            {villes.map((v) => (
+              <li><a href={`/couvreur-a-${v.slug}/`}>Couvreur à {v.nom}</a></li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="plan__bloc">
+          <h2>Informations légales</h2>
+          <ul>
+            {pagesLegales.map((p) => (
+              <li><a href={p.href}>{p.label}</a></li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .plan__intro { color: var(--gris-700); margin-block: 1rem 2.5rem; max-width: 70ch; }
+  .plan__grille {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .plan__bloc h2 { font-size: 1.15rem; margin-bottom: 0.8rem; }
+  .plan__bloc ul { list-style: none; padding: 0; display: grid; gap: 0.45rem; }
+  .plan__bloc a { color: var(--gris-700); text-decoration: none; }
+  .plan__bloc a:hover { color: var(--rouge-fonce); text-decoration: underline; }
+</style>

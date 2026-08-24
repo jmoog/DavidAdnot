@@ -1,0 +1,110 @@
+---
+// Bandeau de consentement cookies — apparaît en glissant du bas vers le haut.
+// Choix mémorisé en localStorage ('adnot-consent' = 'granted' | 'denied').
+// Prêt pour le Consent Mode : si gtag est présent un jour, le choix est propagé.
+---
+<div class="cookies" role="dialog" aria-live="polite" aria-label="Gestion des cookies" hidden>
+  <svg class="cookies__icone" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M21.95 10.99c-1.79-.03-3.34-1.18-3.91-2.87a1 1 0 0 0-1.17-.66c-1.85.37-3.66-.66-4.32-2.42a1 1 0 0 0-1.13-.63A9 9 0 1 0 22 12.66a1 1 0 0 0-.05-1.67ZM12 20a8 8 0 0 1-1.51-15.86 5.94 5.94 0 0 0 5.51 3.1 5.97 5.97 0 0 0 4 3.71A8 8 0 0 1 12 20Z"/>
+    <circle cx="8.5" cy="9.5" r="1.25"/>
+    <circle cx="10" cy="14.5" r="1.25"/>
+    <circle cx="14.5" cy="13" r="1.25"/>
+    <circle cx="13" cy="17.5" r="1"/>
+  </svg>
+  <div class="cookies__texte">
+    <strong>Vos cookies</strong>
+    <p>
+      Nous utilisons une mesure d'audience anonyme pour améliorer ce site.
+      Aucun cookie publicitaire. Vous pouvez accepter ou refuser librement.
+      <a href="/politique-de-confidentialite/">Notre politique de confidentialité</a>
+    </p>
+  </div>
+  <div class="cookies__actions">
+    <button type="button" class="btn btn--bleu cookies__refuser">Refuser</button>
+    <button type="button" class="btn btn--rouge cookies__accepter">Accepter</button>
+  </div>
+</div>
+
+<style>
+  .cookies {
+    position: fixed;
+    inset-inline: 1rem;
+    bottom: 1rem;
+    z-index: 80;
+    max-width: 680px;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    background: var(--blanc);
+    border: 1px solid var(--gris-200);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre-forte);
+    padding: 1.1rem 1.4rem;
+    transform: translateY(calc(100% + 2rem));
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .cookies--visible { transform: translateY(0); }
+  /* L'attribut hidden doit TOUJOURS gagner sur display:flex,
+     sinon le bandeau fermé reste rendu en carré blanc au-dessus
+     de la barre Appeler/WhatsApp/Devis sur mobile */
+  .cookies[hidden] {
+    display: none !important;
+  }
+  .cookies__icone {
+    width: 44px;
+    height: 44px;
+    color: var(--rouge);
+    flex-shrink: 0;
+  }
+  .cookies__texte strong { color: var(--bleu); }
+  .cookies__texte p { margin: 0.2rem 0 0; font-size: 0.88rem; color: var(--gris-700); }
+  .cookies__actions { display: flex; gap: 0.6rem; flex-shrink: 0; }
+  .cookies__actions .btn { font-size: 0.88rem; padding: 0.55em 1.1em; }
+
+  @media (max-width: 700px) {
+    .cookies {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      gap: 0.8rem;
+      /* au-dessus de la barre Appeler/WhatsApp/Devis */
+      bottom: calc(64px + env(safe-area-inset-bottom));
+    }
+    .cookies__texte p { text-align: center; }
+    .cookies__actions { width: 100%; }
+    .cookies__actions .btn { flex: 1; }
+  }
+</style>
+
+<script>
+  const CLE = 'adnot-consent';
+  const bandeau = document.querySelector('.cookies');
+
+  function propagerConsentement(valeur: string) {
+    // Si Google Analytics (gtag) est ajouté un jour, le choix est propagé
+    const w = window as any;
+    if (typeof w.gtag === 'function') {
+      w.gtag('consent', 'update', { analytics_storage: valeur });
+    }
+  }
+
+  const choix = localStorage.getItem(CLE);
+  if (choix) {
+    propagerConsentement(choix);
+  } else if (bandeau) {
+    bandeau.removeAttribute('hidden');
+    // apparition en douceur après un court délai, du bas vers le haut
+    setTimeout(() => bandeau.classList.add('cookies--visible'), 900);
+
+    const fermer = (valeur: string) => {
+      localStorage.setItem(CLE, valeur);
+      propagerConsentement(valeur);
+      bandeau.classList.remove('cookies--visible');
+      setTimeout(() => bandeau.setAttribute('hidden', ''), 700);
+    };
+    bandeau.querySelector('.cookies__accepter')?.addEventListener('click', () => fermer('granted'));
+    bandeau.querySelector('.cookies__refuser')?.addEventListener('click', () => fermer('denied'));
+  }
+</script>

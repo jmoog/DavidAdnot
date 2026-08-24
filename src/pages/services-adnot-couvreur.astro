@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FilAriane from '../components/FilAriane.astro';
+import CtaDevis from '../components/CtaDevis.astro';
+import services from '../data/services.json';
+import villes from '../data/villes.json';
+
+const title = 'Prestations de couverture 78 — David Adnot Artisan Couvreur';
+const description = "Toutes les prestations de David Adnot dans les Yvelines : nettoyage, traitement, réparation, rénovation, isolation, Velux, zinguerie et recherche de fuites.";
+---
+<BaseLayout title={title} description={description}>
+  <section class="section">
+    <div class="conteneur">
+      <FilAriane items={[{ label: 'Accueil', href: '/' }, { label: 'Prestations' }]} />
+      <h1>Tous les services de votre couvreur dans les Yvelines</h1>
+      <p class="services__intro">
+        De l'entretien courant à la réfection complète, je prends en charge votre toiture de
+        A à Z. Chaque prestation fait l'objet d'un devis gratuit, détaillé et sans engagement,
+        et mes travaux sont couverts par la garantie décennale.
+      </p>
+      <div class="grille-services">
+        {services.map((s) => (
+          <a href={`/${s.slug}/`} class="carte carte-service">
+            <img src={s.image} alt={s.alt} loading="lazy" width="400" height="250" />
+            <span class="carte-service__corps">
+              <h3>{s.label}</h3>
+              <p>{s.accroche}</p>
+              <span class="carte-service__lien">{s.lien} →</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--gris">
+    <div class="conteneur">
+      <h2>J'interviens dans le sud des Yvelines</h2>
+      <ul class="nuage-villes">
+        {villes.map((v) => (
+          <li><a href={`/couvreur-a-${v.slug}/`}>{v.nom}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaDevis />
+</BaseLayout>
+
+<style>
+  .services__intro { max-width: 70ch; margin-block: 1rem 1.5rem; color: var(--gris-700); }
+</style>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /merci/
+
+Sitemap: https://www.adnot-couvreur.fr/sitemap-index.xml

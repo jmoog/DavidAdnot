@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroPage from '../components/HeroPage.astro';
+import AvisCarrousel from '../components/AvisCarrousel.astro';
+import CtaDevis from '../components/CtaDevis.astro';
+
+const title = 'Zinguerie et gouttières dans les Yvelines — Pose, réparation';
+const description = "Pose et remplacement de gouttières zinc, alu ou PVC, solins et abergements : une évacuation d'eau fiable pour votre toiture. Artisan à Rambouillet (78).";
+
+const extraSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Zinguerie et gouttières',
+    serviceType: 'Zinguerie, pose et remplacement de gouttières',
+    provider: { '@id': 'https://www.adnot-couvreur.fr/#localbusiness' },
+    areaServed: { '@type': 'AdministrativeArea', name: 'Yvelines (78) — Rambouillet' },
+    url: 'https://www.adnot-couvreur.fr/zinguerie-gouttieres/',
+    description,
+  },
+];
+---
+<BaseLayout title={title} description={description} extraSchemas={extraSchemas}>
+  <HeroPage
+    h1="Gouttières, chéneaux et habillages zinc pour votre maison"
+    image="/images/zinguerie/zinguerie-gouttiere-couvreur-yvelines-03.webp"
+    imageAlt="Gouttière en zinc posée par David Adnot sur une maison des Yvelines"
+    ariane="Zinguerie et gouttières"
+  >
+    <p class="hero__accroche">
+      La zinguerie assure l'étanchéité de tous les points singuliers de la toiture et
+      l'évacuation des eaux de pluie. Couvreur-zingueur à Rambouillet, je façonne, pose et
+      remplace gouttières, chéneaux, noues, solins et abergements.
+    </p>
+    <ul>
+      <li><strong>Gouttières zinc, aluminium ou PVC</strong>, demi-rondes ou carrées.</li>
+      <li><strong>Soudure du zinc</strong> dans les règles de l'art.</li>
+      <li><strong>Descentes, crapaudines et dauphins</strong> pour une évacuation complète.</li>
+    </ul>
+  </HeroPage>
+
+  <AvisCarrousel ordre={6} />
+
+  <!-- ── Gouttières ───────────────────────────────────────────── -->
+  <section class="section">
+    <div class="conteneur duo">
+      <div>
+        <h2>Des gouttières dimensionnées pour votre toit</h2>
+        <p>
+          Une gouttière qui déborde ou qui fuit ne se contente pas de faire du bruit : l'eau
+          ruisselle sur la façade, s'infiltre dans les soubassements et finit par attaquer les
+          fondations. Je dimensionne la gouttière en fonction de la surface de toit à drainer, je
+          règle les pentes au cordeau et je soude ou j'emboîte les éléments selon le matériau
+          retenu.
+        </p>
+        <p>
+          Zinc naturel qui se patine avec le temps, aluminium laqué disponible en de nombreuses
+          teintes, PVC économique : chaque matériau a ses atouts. Je vous conseille selon le
+          style de votre maison, les règles d'urbanisme locales et votre budget.
+        </p>
+        <p>
+          J'assure aussi l'entretien : nettoyage des gouttières encombrées de feuilles, pose de
+          crapaudines et remplacement des fixations fatiguées.
+        </p>
+      </div>
+      <img
+        src="/images/zinguerie/zinguerie-gouttiere-couvreur-yvelines-06.webp"
+        alt="Remplacement d'une gouttière et de sa descente sur une maison des Yvelines"
+        loading="lazy"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </section>
+
+  <!-- ── Zinguerie de toiture ─────────────────────────────────── -->
+  <section class="section section--bleute">
+    <div class="conteneur duo duo--inverse">
+      <div>
+        <h2>Noues, solins et abergements : la zinguerie qui protège</h2>
+        <p>
+          Partout où deux pans de toit se rencontrent, où une cheminée traverse la couverture, où
+          la toiture rejoint un mur, c'est la zinguerie qui fait l'étanchéité. Ces ouvrages —
+          noues, solins, abergements de cheminée, bandes de rive — sont les points les plus
+          sollicités d'une toiture et la première origine des infiltrations quand ils vieillissent.
+        </p>
+        <p>
+          Je façonne ces éléments en zinc et je les pose dans le respect des règles du métier :
+          recouvrements suffisants, dilatation prise en compte, soudures propres. En cas de doute
+          sur une infiltration existante, je commence par une
+          <a href="/recherche-de-fuites/">recherche de fuite</a> pour cibler précisément
+          l'ouvrage en cause.
+        </p>
+        <a href="/contact/" class="btn btn--bleu">Faire vérifier ma zinguerie</a>
+      </div>
+      <img
+        src="/images/zinguerie/zinguerie-gouttiere-couvreur-yvelines-14.webp"
+        alt="Ouvrage de zinguerie sur toiture : noue et solin en zinc dans les Yvelines"
+        loading="lazy"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </section>
+
+  <CtaDevis />
+</BaseLayout>

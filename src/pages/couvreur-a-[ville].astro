@@ -1,0 +1,321 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FilAriane from '../components/FilAriane.astro';
+import AvisCarrousel from '../components/AvisCarrousel.astro';
+import CtaDevis from '../components/CtaDevis.astro';
+import services from '../data/services.json';
+import villes from '../data/villes.json';
+import reviews from '../data/reviews.json';
+
+export async function getStaticPaths() {
+  return villes.map((ville, i) => ({ params: { ville: ville.slug }, props: { ville, i } }));
+}
+
+const { ville, i } = Astro.props;
+
+// Balises reprises du site en prod (title/H1/meta conservés pour le SEO).
+const title = ville.title;
+const h1 = ville.h1;
+const description = ville.description;
+
+// Rotation des formulations pour éviter la duplication entre pages villes.
+const savoirFaireH2 = [
+  `Mon savoir-faire d'Artisan Couvreur à ${ville.nom} ${ville.cp}`,
+  `Mes services de couvreur-zingueur à ${ville.nom}`,
+  `Mes différentes prestations de couvreur à ${ville.nom}`,
+  `Mes services pour votre toiture à ${ville.nom}`,
+][i % 4];
+
+const confianceTexte = [
+  `Le travail de couvreur demande de la technique et une bonne connaissance des matériaux. C'est un métier que j'ai appris au sein de ma famille. Pour chaque chantier à ${ville.nom}, j'applique ces connaissances : je parle avec vous de votre projet et je choisis des matériaux qui durent.`,
+  `Ma pratique de couvreur à ${ville.nom} s'appuie sur une expérience de plus de 20 ans acquise sur tous types de toitures, et sur la maîtrise des matériaux — tuiles, ardoises, zinc, bac acier —, de leurs propriétés et de leurs méthodes de pose.`,
+  `À ${ville.nom}, chaque chantier bénéficie de mon expertise technique et de ma connaissance des matériaux, héritées d'une longue tradition familiale. Je vous guide dans vos choix pour une toiture durable et parfaitement rénovée.`,
+  `Héritier d'une tradition familiale exigeante, je place la qualité et la durabilité au cœur de chaque réalisation à ${ville.nom}. Je vous accompagne dans le choix des solutions et des matériaux les plus adaptés à votre habitat et à votre budget.`,
+][i % 4];
+
+const devisTexte = [
+  `Pour refaire votre toiture à ${ville.nom}, demandez un devis gratuit. Avec plus de 20 ans d'expérience, je réalise des travaux pour un toit étanche et qui dure longtemps. Appelez-moi pour votre projet.`,
+  `Pour tout projet de toiture à ${ville.nom}, je vous propose un devis gratuit. Fort d'une expérience de plus de 20 ans, je réalise des travaux qui assurent l'étanchéité et la durabilité de votre couverture.`,
+  `À ${ville.nom}, obtenez un devis gratuit pour la rénovation de votre toiture. Mon expertise de plus de 20 ans garantit des travaux durables et une étanchéité optimale. Appelez-moi pour concrétiser votre projet.`,
+  `Devis gratuit pour rénover votre toit à ${ville.nom} : mon expérience de plus de 20 ans vous assure une toiture durable et étanche. Appelez-moi pour en discuter.`,
+][i % 4];
+
+// Grille des prestations : les 5 cartes cœur de métier des pages villes du site en prod.
+const servicesGrille = services.filter((s) => [
+  'reparation-toiture',
+  'renovation-toiture',
+  'nettoyage-demoussage-toiture',
+  'application-de-traitement-de-toiture-dans-les-yvelines-78',
+  'zinguerie-gouttieres',
+  'pose-de-velux',
+].includes(s.slug));
+
+const heroImages = [
+  '/images/chantiers/chantier-couverture-rambouillet-yvelines-05.webp',
+  '/images/toitures/toiture-renovee-couvreur-yvelines-03.webp',
+  '/images/renovation/renovation-de-toiture-yvelines-06.webp',
+  '/images/chantiers/chantier-couverture-rambouillet-yvelines-14.webp',
+  '/images/toitures/toiture-renovee-couvreur-yvelines-08.webp',
+];
+const heroImage = heroImages[i % heroImages.length];
+
+const extraSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `Travaux de couverture à ${ville.nom}`,
+    serviceType: 'Travaux de couverture, zinguerie et toiture',
+    provider: { '@id': 'https://www.adnot-couvreur.fr/#localbusiness' },
+    areaServed: { '@type': 'City', name: `${ville.nom} (${ville.cp})` },
+    url: `https://www.adnot-couvreur.fr/couvreur-a-${ville.slug}/`,
+    description,
+  },
+];
+---
+<BaseLayout title={title} description={description} extraSchemas={extraSchemas}>
+  <!-- ── Hero ville ────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="conteneur">
+      <FilAriane items={[{ label: 'Accueil', href: '/' }, { label: `Couvreur à ${ville.nom}` }]} />
+    </div>
+    <div class="conteneur hero__grille">
+      <div class="hero__texte">
+        <h1>{h1}</h1>
+        <p class="hero__google">
+          <span class="hero__etoiles" aria-hidden="true">★★★★★</span>
+          <strong>{reviews.note.toLocaleString('fr-FR')}/5 sur Google · {reviews.nombre} avis</strong>
+        </p>
+        <p class="hero__accroche">{ville.accroche}</p>
+        <ul>
+          <li>Un <strong>artisan couvreur de père en fils</strong>.</li>
+          <li><strong>Garantie décennale</strong> sur tous mes travaux.</li>
+          <li>Plus de <strong>20 ans d'expérience</strong> en tuile, ardoise et zinc.</li>
+        </ul>
+        <div class="hero__actions">
+          <a href="tel:0660491430" class="btn btn--rouge">
+            <svg class="icone" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/></svg>
+            06 60 49 14 30
+          </a>
+          <a href="/contact/" class="btn btn--bleu">Devis Gratuit →</a>
+        </div>
+        {ville.slug === 'rambouillet' && (
+          <p class="hero__adresse">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Zone Industrielle le Pâtis, 4 Rue Paul Démange, 78120 Rambouillet
+          </p>
+        )}
+      </div>
+
+      <div class="hero__media">
+        <img
+          class="hero__photo"
+          src={heroImage}
+          alt={`Chantier de couverture mené par David Adnot dans le secteur de ${ville.nom}`}
+          fetchpriority="high"
+          width="1200"
+          height="900"
+        />
+        <div class="carte hero__garantie">
+          <span class="hero__garantie-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5z"/><path d="M8.5 12l2.5 2.5L16 9.5"/></svg>
+          </span>
+          <p><strong>Garantie Décennale</strong><br />Pour tous travaux de couverture</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Avis clients ──────────────────────────────────────────── -->
+  <AvisCarrousel lieu={`à ${ville.nom}`} ordre={i} />
+
+  <!-- ── Prestations en cartes ─────────────────────────────────── -->
+  <section class="section section--gris">
+    <div class="conteneur">
+      <h2>{savoirFaireH2}</h2>
+      <div class="grille-services">
+        {servicesGrille.map((s) => (
+          <a href={`/${s.slug}/`} class="carte carte-service">
+            <img src={s.image} alt={s.alt} loading="lazy" width="400" height="250" />
+            <span class="carte-service__corps">
+              <h3>{s.label}</h3>
+              <p>{s.accroche}</p>
+              <span class="carte-service__lien">{s.lien} →</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Un couvreur de confiance ──────────────────────────────── -->
+  <section class="section">
+    <div class="conteneur duo">
+      <div>
+        <h2>Un couvreur-zingueur de confiance pour tous vos travaux</h2>
+        <p>{confianceTexte}</p>
+        <p>
+          J'interviens sur tous types de toitures — <strong>tuile</strong>,
+          <strong>ardoise</strong>, <strong>zinc</strong> ou <strong>bac acier</strong> — de la
+          <a href="/reparation-toiture/">réparation ponctuelle</a> à la
+          <a href="/renovation-toiture/">rénovation complète</a>, en passant par le
+          <a href="/nettoyage-demoussage-toiture/">nettoyage et le démoussage</a> de votre
+          couverture.
+        </p>
+        <p>
+          Basé à Rambouillet, à proximité immédiate de {ville.nom}, je me déplace rapidement pour
+          un diagnostic ou un dépannage.
+        </p>
+      </div>
+      <img
+        src={heroImages[(i + 2) % heroImages.length]}
+        alt={`Travaux de couverture réalisés par un artisan couvreur près de ${ville.nom}`}
+        loading="lazy"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </section>
+
+  <!-- ── Urbanisme ─────────────────────────────────────────────── -->
+  <section class="section section--bleute urbanisme">
+    <div class="conteneur">
+      <div class="section__entete section__entete--gauche">
+        <h2>Autorisations et urbanisme à {ville.nom}</h2>
+      </div>
+      <p>
+        La réalisation de travaux sur votre toiture à {ville.nom} peut nécessiter une
+        autorisation administrative. Dès lors que les travaux changent l'aspect extérieur du
+        bâtiment — teinte des tuiles, matériau de couverture, pose de fenêtres de toit — une
+        déclaration préalable de travaux est le plus souvent exigée ; pour des modifications
+        substantielles, un permis de construire peut être obligatoire.
+      </p>
+      <p>
+        Ces démarches relèvent du propriétaire : renseignez-vous en amont auprès de la
+        {ville.mairie && ville.mairie.site
+          ? (<a href={ville.mairie.site} rel="noopener" target="_blank">mairie de {ville.nom}</a>)
+          : (`mairie de ${ville.nom}`)} pour connaître les règles du Plan Local d'Urbanisme
+        applicables à votre secteur. De mon côté, je vous fournis les informations techniques
+        nécessaires à la constitution de votre dossier.
+      </p>
+      {ville.mairie && (
+        <div class="mairie-carte">
+          <span class="mairie-carte__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg>
+          </span>
+          <div class="mairie-carte__corps">
+            <p class="mairie-carte__label">{ville.mairie.nom}</p>
+            <p class="mairie-carte__adresse">{ville.mairie.adresse}</p>
+            {ville.mairie.site && (
+              <div class="mairie-carte__actions">
+                <a href={ville.mairie.site} rel="noopener" target="_blank" class="mairie-carte__btn">
+                  Site officiel
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ── Devis local ───────────────────────────────────────────── -->
+  <section class="section section--bleu cta-final">
+    <div class="conteneur">
+      <h2>Obtenez un devis pour vos travaux de toiture à {ville.nom}</h2>
+      <p>{devisTexte}</p>
+      <div class="cta-final__actions">
+        <a href="tel:0660491430" class="btn btn--rouge">
+          <svg class="icone" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/></svg>
+          06 60 49 14 30
+        </a>
+        <a href="/contact/" class="btn btn--blanc">Demander un devis gratuit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA devis ─────────────────────────────────────────────── -->
+  <CtaDevis />
+</BaseLayout>
+
+<style>
+  .hero__adresse {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.4rem 0 0;
+    font-size: 0.95rem;
+    color: var(--gris-700);
+  }
+  .hero__adresse svg { width: 1.1rem; height: 1.1rem; color: var(--rouge); flex-shrink: 0; }
+
+  .hero__garantie-icone {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--rouge-pale);
+    color: var(--rouge);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero__garantie-icone svg { width: 2.1rem; height: 2.1rem; }
+
+  .urbanisme h3 { margin-top: 2.5rem; margin-bottom: 0.6rem; }
+  .urbanisme p { line-height: 1.7; }
+
+  .mairie-carte {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1.75rem 0 0.5rem;
+    padding: 1.75rem 2rem;
+    background: var(--blanc);
+    border: 1px solid var(--gris-200);
+    border-radius: 16px;
+    box-shadow: var(--ombre);
+  }
+  .mairie-carte__icone {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--bleu) 10%, transparent);
+    color: var(--bleu);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mairie-carte__icone svg { width: 1.8rem; height: 1.8rem; }
+  .mairie-carte__corps { display: flex; flex-direction: column; gap: 0.15rem; }
+  .mairie-carte__label {
+    margin: 0;
+    font-weight: 700;
+    color: var(--bleu);
+    font-size: 1.05rem;
+  }
+  .mairie-carte__adresse { margin: 0 0 0.9rem; color: var(--gris-700); }
+  .mairie-carte__actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .mairie-carte__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    background: var(--bleu);
+    color: var(--blanc);
+    border: 1px solid var(--bleu);
+    transition: background var(--transition, 0.2s), color var(--transition, 0.2s);
+  }
+  .mairie-carte__btn svg { width: 1rem; height: 1rem; }
+  .mairie-carte__btn:hover { background: var(--rouge); border-color: var(--rouge); color: var(--blanc); }
+
+  @media (max-width: 560px) {
+    .mairie-carte { flex-direction: column; align-items: flex-start; padding: 1.5rem; gap: 1rem; }
+    .mairie-carte__btn { justify-content: center; }
+  }
+</style>

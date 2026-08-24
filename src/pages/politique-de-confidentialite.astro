@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FilAriane from '../components/FilAriane.astro';
+
+const title = 'Politique de Confidentialité - David Adnot Couvreur';
+const description = "Découvrez comment David Adnot protège vos données personnelles. Notre politique de confidentialité (RGPD) détaille la collecte, l'usage et vos droits sur vos informations.";
+---
+<BaseLayout title={title} description={description}>
+  <section class="section">
+    <div class="conteneur prose">
+      <FilAriane items={[{ label: 'Accueil', href: '/' }, { label: 'Politique de confidentialité' }]} />
+      <h1>Politique de confidentialité</h1>
+      <p><em>Date de dernière mise à jour : 24 août 2025</em></p>
+
+      <p>
+        La présente politique de confidentialité décrit la manière dont l'entreprise
+        individuelle David ADNOT, en sa qualité de responsable de traitement, collecte, utilise
+        et protège les informations que vous nous transmettez lorsque vous utilisez notre site
+        internet accessible à l'adresse
+        <a href="https://www.adnot-couvreur.fr/">https://www.adnot-couvreur.fr/</a>.
+      </p>
+      <p>
+        La protection de vos données personnelles est une priorité. Nous nous engageons à
+        n'utiliser vos données que dans le cadre défini par la législation en vigueur,
+        notamment le Règlement Général sur la Protection des Données (RGPD).
+      </p>
+      <p>
+        <strong>Responsable du traitement :</strong> David ADNOT — 19 Place du Poutil,
+        91640 Briis-sous-Forges — <a href="mailto:contact@adnot-couvreur.fr">contact@adnot-couvreur.fr</a>
+        — <a href="tel:0660491430">06 60 49 14 30</a>
+      </p>
+
+      <h2>Article 1 : Quelles données collectons-nous ?</h2>
+      <p>Dans le cadre de l'utilisation de notre site, nous sommes susceptibles de collecter les données suivantes :</p>
+      <ul>
+        <li>
+          <strong>Données fournies directement par vous</strong> via le formulaire de contact ou
+          de devis : nom et prénom, adresse e-mail, numéro de téléphone, ville et code postal
+          (pour localiser le projet), ainsi que toute information que vous choisissez de
+          partager dans le corps de votre message (description de votre projet, etc.).
+        </li>
+        <li>
+          <strong>Données collectées automatiquement (cookies)</strong> : données de navigation
+          (adresse IP anonymisée, type de navigateur, pages visitées) à des fins de mesure
+          d'audience et d'amélioration du service.
+        </li>
+      </ul>
+
+      <h2>Article 2 : Pourquoi collectons-nous ces données ? (Finalités)</h2>
+      <p>
+        Les données que vous nous transmettez sont utilisées dans le but exclusif de répondre à
+        vos demandes et de gérer notre relation commerciale. Plus précisément :
+      </p>
+      <ul>
+        <li><strong>Pour répondre à vos demandes de contact et de devis</strong> : établir une communication, analyser votre besoin, rédiger une proposition commerciale et vous la transmettre.</li>
+        <li><strong>Pour la gestion de la relation client</strong> : assurer le suivi des chantiers, la facturation et le service après-vente.</li>
+        <li><strong>Pour améliorer notre site web</strong> : analyser l'audience de notre site de manière anonymisée pour comprendre comment les visiteurs naviguent et améliorer leur expérience.</li>
+        <li><strong>Pour respecter nos obligations légales</strong>, notamment en matière de comptabilité.</li>
+      </ul>
+
+      <h2>Article 3 : Qui a accès à vos données ? (Destinataires)</h2>
+      <p>David ADNOT est le seul et unique destinataire des informations que vous nous communiquez.</p>
+      <p>
+        Nous nous engageons à ne jamais vendre, louer, céder ou donner accès à vos données à des
+        tiers à des fins de marketing sans votre consentement préalable.
+      </p>
+      <p>
+        Vos données sont hébergées sur les serveurs sécurisés de notre hébergeur, qui agit en
+        qualité de sous-traitant et est soumis aux mêmes obligations de confidentialité et de
+        sécurité.
+      </p>
+
+      <h2>Article 4 : Combien de temps conservons-nous vos données ?</h2>
+      <p>
+        Nous conservons vos données pour une durée limitée, qui n'excède pas celle nécessaire
+        aux finalités pour lesquelles elles ont été collectées :
+      </p>
+      <ul>
+        <li><strong>Demande de devis n'ayant pas abouti :</strong> 3 ans à compter du dernier contact.</li>
+        <li><strong>Données relatives aux clients</strong> (devis acceptés, factures) : 10 ans à compter de la clôture de l'exercice comptable, conformément à nos obligations légales.</li>
+        <li><strong>Cookies de mesure d'audience :</strong> 13 mois maximum.</li>
+      </ul>
+
+      <h2>Article 5 : Comment protégeons-nous vos données ?</h2>
+      <p>
+        Nous mettons en œuvre toutes les mesures de sécurité techniques et organisationnelles
+        pour protéger vos données personnelles. Le site utilise notamment un protocole de
+        sécurisation SSL (HTTPS) qui garantit le chiffrement des informations transmises.
+      </p>
+
+      <h2>Article 6 : Quels sont vos droits ?</h2>
+      <p>
+        Conformément à la loi « Informatique et Libertés » et au RGPD, vous disposez des droits
+        suivants concernant vos données : droit d'accès, droit de rectification, droit à
+        l'effacement (« droit à l'oubli »), droit à la limitation du traitement, droit à la
+        portabilité et droit d'opposition.
+      </p>
+      <p>
+        Pour exercer l'un de ces droits, vous pouvez nous contacter par e-mail à
+        <a href="mailto:contact@adnot-couvreur.fr">contact@adnot-couvreur.fr</a> ou par courrier
+        postal. Une réponse vous sera apportée dans un délai d'un mois.
+      </p>
+
+      <h2>Article 7 : Gestion des cookies</h2>
+      <p>Notre site utilise des cookies pour assurer son bon fonctionnement et pour mesurer l'audience :</p>
+      <ul>
+        <li><strong>Cookies essentiels :</strong> nécessaires à la navigation sur le site.</li>
+        <li>
+          <strong>Cookies de mesure d'audience :</strong> le cas échéant, une mesure d'audience
+          anonyme est utilisée pour améliorer ce site. L'adresse IP est anonymisée et les
+          données collectées ne sont jamais partagées avec des tiers.
+        </li>
+      </ul>
+      <p>
+        Lors de votre première visite, un bandeau d'information vous permet d'accepter ou de
+        refuser le dépôt des cookies non essentiels. Vous pouvez modifier votre choix à tout
+        moment.
+      </p>
+
+      <h2>Article 8 : Droit de réclamation auprès de la CNIL</h2>
+      <p>
+        Si vous estimez, après nous avoir contactés, que vos droits sur vos données ne sont pas
+        respectés, vous pouvez adresser une réclamation à la
+        <a href="https://www.cnil.fr/" rel="noopener" target="_blank">Commission Nationale de
+        l'Informatique et des Libertés (CNIL)</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

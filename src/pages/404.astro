@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import services from '../data/services.json';
+---
+<BaseLayout
+  title="Page introuvable – David Adnot, couvreur dans les Yvelines"
+  description="La page que vous cherchez n'existe pas ou a été déplacée. Retrouvez nos services de couverture dans les Yvelines depuis l'accueil."
+>
+  <section class="section erreur404">
+    <div class="conteneur">
+      <p class="erreur404__code" aria-hidden="true">404</p>
+      <h1>Cette page s'est envolée avec le vent…</h1>
+      <p>
+        La page que vous cherchez n'existe pas ou a été déplacée. Pas d'inquiétude :
+        contrairement à une tuile, elle n'a blessé personne en tombant.
+      </p>
+      <div class="erreur404__actions">
+        <a href="/" class="btn btn--rouge">Revenir à l'accueil</a>
+        <a href="/contact/" class="btn btn--bleu">Demander un devis gratuit</a>
+      </div>
+
+      <h2>Vous cherchiez peut-être l'une de mes prestations ?</h2>
+      <ul class="erreur404__liens">
+        {services.map((s) => (
+          <li><a href={`/${s.slug}/`}>{s.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .erreur404 { text-align: center; padding-block: clamp(3rem, 8vw, 6rem); }
+  .erreur404__code {
+    font-size: clamp(5rem, 14vw, 9rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--rouge);
+    margin-bottom: 0.5rem;
+  }
+  .erreur404 h1 { margin-bottom: 1rem; }
+  .erreur404 p { max-width: 52ch; margin-inline: auto; text-align: center; }
+  .erreur404__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-block: 2rem 3rem; }
+  .erreur404 h2 { font-size: 1.15rem; margin-bottom: 1.2rem; }
+  .erreur404__liens {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .erreur404__liens a {
+    display: inline-block;
+    padding: 0.45em 1em;
+    background: var(--blanc);
+    border: 1px solid var(--gris-200);
+    border-radius: var(--rayon);
+    text-decoration: none;
+    color: var(--gris-700);
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: border-color var(--transition), color var(--transition);
+  }
+  .erreur404__liens a:hover { border-color: var(--rouge); color: var(--rouge-fonce); }
+</style>

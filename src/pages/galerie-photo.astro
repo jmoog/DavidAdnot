@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FilAriane from '../components/FilAriane.astro';
+import CtaDevis from '../components/CtaDevis.astro';
+import galerie from '../data/galerie.json';
+
+const title = 'Photos de chantiers — David Adnot, couvreur à Rambouillet';
+const description = "Rénovations, faîtages, zinguerie, démoussage : découvrez en photos les chantiers menés par David Adnot dans les Yvelines et autour de Rambouillet.";
+
+// Construit la liste d'images de chaque catégorie à partir du manifeste
+// (fichiers numérotés NN, avec exclusions éventuelles).
+const categories = galerie.map((cat) => ({
+  ...cat,
+  images: Array.from({ length: cat.nombre }, (_, k) => k + 1)
+    .filter((n) => !cat.exclusions.includes(n))
+    .map((n) => `${cat.dossier}${cat.prefixe}${String(n).padStart(2, '0')}.webp`),
+}));
+---
+<BaseLayout title={title} description={description}>
+  <section class="section">
+    <div class="conteneur">
+      <FilAriane items={[{ label: 'Accueil', href: '/' }, { label: 'Galerie photo' }]} />
+      <h1>Nos chantiers de couverture en images</h1>
+      <p class="galerie__intro">
+        Un aperçu concret de mon travail dans les Yvelines : rénovations complètes, faîtages et
+        arêtiers, zinguerie, fenêtres de toit, démoussage… Cliquez sur une catégorie pour
+        afficher les photos correspondantes.
+      </p>
+
+      <div class="galerie__filtres" role="tablist" aria-label="Catégories de photos">
+        {categories.map((cat, idx) => (
+          <button
+            type="button"
+            class={`galerie__filtre${idx === 0 ? ' actif' : ''}`}
+            data-cat={cat.cle}
+          >
+            {cat.titre} <span class="galerie__compte">{cat.images.length}</span>
+          </button>
+        ))}
+      </div>
+
+      {categories.map((cat, idx) => (
+        <div class={`galerie__grille${idx === 0 ? '' : ' cachee'}`} data-cat={cat.cle}>
+          {cat.images.map((src, k) => (
+            <a href={src} target="_blank" rel="noopener" class="galerie__item">
+              <img src={src} alt={`${cat.alt} — photo ${k + 1}`} loading="lazy" decoding="async" />
+            </a>
+          ))}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CtaDevis />
+</BaseLayout>
+
+<style>
+  .galerie__intro { max-width: 70ch; margin-block: 1rem 2rem; color: var(--gris-700); }
+  .galerie__filtres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+  }
+  .galerie__filtre {
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--gris-700);
+    background: var(--blanc);
+    border: 1px solid var(--gris-200);
+    border-radius: var(--rayon);
+    padding: 0.45em 1em;
+    cursor: pointer;
+    transition: border-color var(--transition), color var(--transition), background var(--transition);
+  }
+  .galerie__filtre:hover { border-color: var(--rouge); color: var(--rouge-fonce); }
+  .galerie__filtre.actif {
+    background: var(--bleu);
+    border-color: var(--bleu);
+    color: var(--blanc);
+  }
+  .galerie__compte {
+    font-weight: 500;
+    opacity: 0.7;
+    margin-left: 0.3em;
+  }
+  .galerie__grille {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+  .galerie__grille.cachee { display: none; }
+  .galerie__item {
+    display: block;
+    border-radius: var(--rayon);
+    overflow: hidden;
+    box-shadow: var(--ombre);
+    aspect-ratio: 4 / 3;
+    background: var(--gris-100);
+  }
+  .galerie__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition);
+  }
+  .galerie__item:hover img { transform: scale(1.04); }
+</style>
+
+<script>
+  const filtres = document.querySelectorAll('.galerie__filtre');
+  const grilles = document.querySelectorAll('.galerie__grille');
+  filtres.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cat = btn.getAttribute('data-cat');
+      filtres.forEach((b) => b.classList.toggle('actif', b === btn));
+      grilles.forEach((g) => g.classList.toggle('cachee', g.getAttribute('data-cat') !== cat));
+    });
+  });
+</script>

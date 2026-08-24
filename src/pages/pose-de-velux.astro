@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroPage from '../components/HeroPage.astro';
+import AvisCarrousel from '../components/AvisCarrousel.astro';
+import CtaDevis from '../components/CtaDevis.astro';
+
+const title = 'Pose de Velux en Yvelines (78) — Installation, remplacement';
+const description = "Installation et remplacement de fenêtres de toit Velux autour de Rambouillet. Étanchéité garantie, lumière naturelle en plus. Devis gratuit et détaillé.";
+
+const extraSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Pose de fenêtres de toit Velux',
+    serviceType: 'Installation et remplacement de fenêtres de toit',
+    provider: { '@id': 'https://www.adnot-couvreur.fr/#localbusiness' },
+    areaServed: { '@type': 'AdministrativeArea', name: 'Yvelines (78) — Rambouillet' },
+    url: 'https://www.adnot-couvreur.fr/pose-de-velux/',
+    description,
+  },
+];
+---
+<BaseLayout title={title} description={description} extraSchemas={extraSchemas}>
+  <HeroPage
+    h1="Installer une fenêtre de toit dans votre maison du 78"
+    image="/images/velux/pose-fenetre-de-toit-velux-yvelines-01.webp"
+    imageAlt="Fenêtre de toit Velux posée sur une toiture en tuiles dans les Yvelines"
+    ariane="Pose de Velux"
+  >
+    <p class="hero__accroche">
+      Des combles sombres, une pièce mansardée à éclairer, un ancien châssis qui fuit ?
+      J'installe et je remplace les fenêtres de toit Velux autour de Rambouillet, avec un
+      raccordement d'étanchéité réalisé dans les règles de l'art.
+    </p>
+    <ul>
+      <li><strong>Pose neuve</strong> avec création du chevêtre dans la charpente.</li>
+      <li><strong>Remplacement</strong> d'anciens modèles, à dimensions identiques ou agrandies.</li>
+      <li><strong>Habillage et finitions</strong> : raccords, gorges et jouées propres.</li>
+    </ul>
+  </HeroPage>
+
+  <AvisCarrousel tag="velux" ordre={5} />
+
+  <!-- ── Pose et remplacement ─────────────────────────────────── -->
+  <section class="section">
+    <div class="conteneur duo">
+      <div>
+        <h2>Pourquoi confier votre Velux à un artisan couvreur</h2>
+        <p>
+          Une fenêtre de toit, c'est une ouverture volontaire dans une surface conçue pour être
+          étanche. Tout se joue dans le raccordement : le chevêtre taillé dans la charpente, la
+          collerette d'étanchéité, le raccord adapté au matériau de couverture et la gestion de
+          l'eau autour du cadre. Mal posé, un Velux devient le premier point d'infiltration de la
+          maison.
+        </p>
+        <p>
+          En tant que couvreur, je traite la fenêtre et la couverture comme un ensemble : je
+          dépose les tuiles ou ardoises nécessaires, je pose le cadre et son raccord
+          d'étanchéité, puis je remets la couverture en respectant le sens d'écoulement de l'eau.
+          Les finitions intérieures et l'habillage extérieur — y compris en
+          <a href="/zinguerie-gouttieres/">zinguerie</a> ou en bardage PVC pour les jouées — sont
+          réalisés proprement.
+        </p>
+        <p>
+          Bon à savoir : dans le périmètre du Parc Naturel de la Haute Vallée de Chevreuse, la
+          création d'une fenêtre de toit modifie l'aspect extérieur du bâtiment et demande le
+          plus souvent une déclaration préalable de travaux en mairie.
+        </p>
+      </div>
+      <img
+        src="/images/velux/pose-fenetre-de-toit-velux-yvelines-04.webp"
+        alt="Installation d'une fenêtre de toit Velux avec raccord d'étanchéité dans les Yvelines"
+        loading="lazy"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </section>
+
+  <!-- ── Options ──────────────────────────────────────────────── -->
+  <section class="section section--bleute">
+    <div class="conteneur">
+      <h2>Modèles et options possibles</h2>
+      <div class="etapes">
+        <div class="etape">
+          <span class="etape__numero">01</span>
+          <h3>Rotation ou projection</h3>
+          <p>
+            Ouverture par rotation pour les pentes classiques, par projection pour dégager la vue
+            et la hauteur sous plafond dans les pièces de vie.
+          </p>
+        </div>
+        <div class="etape">
+          <span class="etape__numero">02</span>
+          <h3>Vitrages et confort</h3>
+          <p>
+            Double ou triple vitrage, protection solaire, volets roulants et stores : de quoi
+            maîtriser la chaleur d'été et le confort d'hiver.
+          </p>
+        </div>
+        <div class="etape">
+          <span class="etape__numero">03</span>
+          <h3>Manuel ou motorisé</h3>
+          <p>
+            Commande manuelle, électrique ou solaire pour les fenêtres difficiles d'accès, avec
+            capteur de pluie en option.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaDevis />
+</BaseLayout>

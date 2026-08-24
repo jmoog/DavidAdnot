@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroPage from '../components/HeroPage.astro';
+import AvisCarrousel from '../components/AvisCarrousel.astro';
+import CtaDevis from '../components/CtaDevis.astro';
+
+const title = 'Recherche de fuite toiture (78) — Intervention rapide';
+const description = "Tache au plafond, infiltration après un orage ? Je localise le point d'entrée réel de l'eau et je répare durablement. Déplacement rapide dans les Yvelines.";
+
+const extraSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Recherche et réparation de fuites de toiture',
+    serviceType: 'Recherche de fuite et réparation d\'infiltration',
+    provider: { '@id': 'https://www.adnot-couvreur.fr/#localbusiness' },
+    areaServed: { '@type': 'AdministrativeArea', name: 'Yvelines (78) — Rambouillet' },
+    url: 'https://www.adnot-couvreur.fr/recherche-de-fuites/',
+    description,
+  },
+];
+---
+<BaseLayout title={title} description={description} extraSchemas={extraSchemas}>
+  <HeroPage
+    h1="Trouver et stopper l'origine d'une infiltration d'eau"
+    image="/images/chantiers/chantier-couverture-rambouillet-yvelines-04.webp"
+    imageAlt="Inspection d'une toiture en tuiles pour recherche de fuite dans les Yvelines"
+    ariane="Recherche de fuites"
+  >
+    <p class="hero__accroche">
+      Une auréole au plafond, de l'eau qui goutte dans les combles après un orage ? L'eau visible
+      circule rarement à l'aplomb de son point d'entrée. Je mène une recherche méthodique sur la
+      couverture pour identifier la cause réelle avant de réparer.
+    </p>
+    <ul>
+      <li><strong>Inspection complète</strong> : couverture, écran, noues, solins, abergements.</li>
+      <li><strong>Mise hors d'eau</strong> immédiate en cas de sinistre.</li>
+      <li><strong>Réparation durable</strong> de la cause, pas seulement du symptôme.</li>
+    </ul>
+  </HeroPage>
+
+  <AvisCarrousel tag="fuite" ordre={7} />
+
+  <!-- ── Méthode ──────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="conteneur duo">
+      <div>
+        <h2>Comment je localise une fuite de toiture</h2>
+        <p>
+          L'eau qui tache un plafond a pu parcourir plusieurs mètres le long d'un chevron, d'un
+          écran de sous-toiture ou d'une panne avant de devenir visible. Réparer « au-dessus de
+          la tache » ne sert souvent à rien. Je remonte le cheminement de l'eau depuis
+          l'intérieur quand c'est possible, puis j'inspecte la couverture : tuiles ou ardoises
+          fissurées ou déplacées, faîtage descellé, noues encombrées, solins décollés,
+          abergements de cheminée fatigués, joints de fenêtre de toit.
+        </p>
+        <p>
+          Une fois le point d'entrée identifié, je vous explique ce que j'ai trouvé, photos à
+          l'appui, et je chiffre la <a href="/reparation-toiture/">réparation</a> : remplacement
+          des éléments en cause, reprise de la <a href="/zinguerie-gouttieres/">zinguerie</a> ou
+          réfection localisée de la couverture.
+        </p>
+      </div>
+      <img
+        src="/images/chantiers/chantier-couverture-rambouillet-yvelines-07.webp"
+        alt="Couvreur inspectant une toiture pour localiser une infiltration dans les Yvelines"
+        loading="lazy"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </section>
+
+  <!-- ── Urgence ──────────────────────────────────────────────── -->
+  <section class="section section--bleute">
+    <div class="conteneur">
+      <h2>Intervention en urgence et mise hors d'eau</h2>
+      <p>
+        Je réserve des créneaux pour les interventions urgentes : fuites importantes, dégâts
+        après une tempête. L'objectif est de mettre votre toiture hors d'eau dans les plus brefs
+        délais — pose d'une bâche de protection solidement fixée — en attendant une réparation
+        définitive programmée dès que possible. N'attendez pas que le plafond s'effondre :
+        appelez-moi au <a href="tel:0660491430"><strong>06 60 49 14 30</strong></a>.
+      </p>
+    </div>
+  </section>
+
+  <CtaDevis />
+</BaseLayout>

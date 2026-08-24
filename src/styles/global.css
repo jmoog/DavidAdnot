@@ -1,0 +1,428 @@
+/* ════════════════════════════════════════════════════════════════════
+   DAVID ADNOT — ARTISAN COUVREUR — Design system CSS vanilla (pas de framework)
+   Palette extraite du logo : bleu #2179DF + rouge #B73337 + gris #D6DCE3.
+   Typo : Montserrat auto-hébergée (var --font-montserrat injectée par Astro).
+   ════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Couleurs de marque (logo) */
+  --bleu: #1a5aa6;            /* bleu nuit — titres, grandes surfaces, aplats */
+  --bleu-accent: #2179df;     /* bleu vif du logo — accents, liens, petites touches */
+  --bleu-fonce: #0e2f52;      /* le plus sombre — footer, sections, hero overlay */
+  --bleu-clair: #4a94e8;      /* variante claire — survols */
+  --bleu-pale: #e9f1fb;       /* fonds discrets bleutés (badges, sections) */
+
+  --rouge: #b73337;           /* rouge du logo — CTA et accents */
+  --rouge-fonce: #922629;     /* hover CTA */
+  --rouge-pale: #f9ecec;      /* fonds discrets, badges */
+
+  /* Accent ponctuel */
+  --etoile: #f5b400;          /* étoiles d'avis (or) */
+
+  /* Neutres (légèrement bleutés pour s'harmoniser) */
+  --noir: #17202b;
+  --gris-700: #3d4754;
+  --gris-500: #66707d;
+  --gris-200: #dfe4ea;
+  --gris-100: #eff2f6;
+  --gris-50: #f7f9fb;
+  --blanc: #ffffff;
+
+  /* Alias de compatibilité — d'anciennes pages (couvreurs, services)
+     utilisent ces noms de tokens : on les rattache à la palette. */
+  --color-orange: var(--rouge);
+  --color-bleu-dark: var(--bleu-fonce);
+  --color-blanc: var(--blanc);
+  --color-gris: var(--gris-700);
+  --color-gris-clair: var(--gris-100);
+  --color-gris-moyen: var(--gris-500);
+  --color-texte-light: var(--gris-500);
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Typo */
+  --font: var(--font-montserrat), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Espacements & divers */
+  --conteneur: 1200px;
+  --rayon: 10px;
+  --ombre: 0 2px 12px rgba(14, 47, 82, 0.09);
+  --ombre-forte: 0 8px 30px rgba(14, 47, 82, 0.16);
+  --transition: 0.2s ease;
+}
+
+/* ── Reset minimal ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font);
+  color: var(--noir);
+  background: var(--blanc);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1; }
+img, svg, video { display: block; max-width: 100%; height: auto; }
+a { color: var(--bleu-accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--bleu); }
+ul, ol { padding-left: 1.2em; }
+
+/* ── Typographie ───────────────────────────────────────────────── */
+h1, h2, h3, h4 { line-height: 1.2; color: var(--bleu); text-wrap: balance; font-weight: 700; }
+/* Texte courant : toujours aligné à gauche, et « pretty » évite les
+   retours à la ligne sur un seul mot (orphelins) en fin de paragraphe. */
+p, li { text-wrap: pretty; text-align: left; }
+h1 { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 800; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+h3 { font-size: 1.2rem; }
+
+/* Titres de sections centrés (les titres dans les blocs deux-colonnes
+   et le hero restent alignés à gauche) */
+.section > .conteneur > h2 {
+  text-align: center;
+}
+
+/* En-tête de section au-dessus d'un bloc deux-colonnes :
+   centré sur mobile, aligné à gauche sur desktop */
+.section__entete { text-align: center; margin-bottom: 2rem; }
+@media (min-width: 900px) {
+  .section__entete--gauche { text-align: left; }
+}
+
+/* Mobile : titres, boutons et éléments d'accroche centrés —
+   les textes courants restent alignés à gauche
+   (la règle `p, li { text-align: left }` ci-dessus garde la main) */
+@media (max-width: 800px) {
+  h1, h2, h3, .hero__marque { text-align: center; }
+
+  /* Groupes de boutons centrés */
+  .hero__actions,
+  .cta-devis__actions,
+  .cta-final__actions {
+    justify-content: center;
+  }
+
+  /* Boutons seuls (fin des blocs texte) centrés */
+  .duo .btn,
+  .hero__texte > .btn {
+    display: flex;
+    width: fit-content;
+    margin-inline: auto;
+  }
+
+  /* Ligne Google du hero centrée */
+  .hero__google { justify-content: center; }
+}
+
+/* ── Layout ────────────────────────────────────────────────────── */
+.conteneur { max-width: var(--conteneur); margin-inline: auto; padding-inline: 1rem; }
+.section { padding-block: clamp(3rem, 7vw, 5rem); }
+.section--gris { background: var(--gris-50); }
+/* Fond bleuté plus marqué, pour donner du relief aux sections clés */
+.section--bleute {
+  background: linear-gradient(180deg, #ddeafa 0%, var(--bleu-pale) 100%);
+}
+.section--bleu { background: var(--bleu-fonce); }
+.section--bleu h2, .section--bleu h3, .section--bleu p { color: var(--blanc); }
+
+/* Grille deux colonnes image + texte (s'empile en mobile) */
+.duo { display: grid; gap: 2.5rem; align-items: center; }
+@media (min-width: 900px) {
+  .duo { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .duo--inverse > :first-child { order: 2; }
+}
+.duo img { border-radius: var(--rayon); box-shadow: var(--ombre-forte); width: 100%; object-fit: cover; }
+
+/* ── Boutons ───────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0.8em 1.6em;
+  border-radius: var(--rayon); /* 10px — pas de pills */
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+}
+.btn:active { transform: scale(0.97); }
+.btn--rouge { background: var(--rouge); color: var(--blanc); }
+.btn--rouge:hover { background: var(--rouge-fonce); color: var(--blanc); }
+.btn--blanc { background: var(--blanc); color: var(--bleu); }
+.btn--blanc:hover { background: var(--gris-100); color: var(--bleu); }
+.btn--contour { border-color: currentColor; color: var(--blanc); background: transparent; }
+.btn--contour:hover { background: rgba(255, 255, 255, 0.12); color: var(--blanc); }
+.btn--bleu { background: var(--bleu); color: var(--blanc); }
+.btn--bleu:hover { background: var(--bleu-clair); color: var(--blanc); }
+
+/* Icône inline dans les boutons et liens (remplace les emojis) */
+.icone { width: 1.1em; height: 1.1em; flex-shrink: 0; display: inline-block; vertical-align: -0.18em; }
+
+/* ── Cartes ────────────────────────────────────────────────────── */
+.carte {
+  background: var(--blanc);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre);
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.carte:hover { box-shadow: var(--ombre-forte); transform: translateY(-3px); }
+
+/* ── Hero clair, deux colonnes (design LJ) ─────────────────────── */
+.hero { background: var(--blanc); padding-block: clamp(2.5rem, 5vw, 4.5rem); }
+.hero__grille { display: grid; gap: 3rem; align-items: center; }
+@media (min-width: 980px) {
+  .hero__grille { grid-template-columns: 1.05fr 0.95fr; gap: 4rem; }
+}
+.hero h1 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; }
+.hero__marque {
+  font-size: clamp(1.75rem, 5.8vw, 3.4rem);
+  font-weight: 800;
+  color: var(--bleu);
+  line-height: 1.05;
+  margin-block: 0.2rem 1rem;
+  white-space: nowrap; /* « Lafleur Couvreur » toujours sur une seule ligne */
+}
+.hero__google { display: flex; align-items: center; gap: 0.5em; color: var(--bleu); margin-bottom: 1.4rem; }
+.hero__google img { width: 24px; height: 24px; }
+.hero__accroche { font-size: 1.12rem; margin-bottom: 1rem; }
+.hero__texte p, .hero__texte ul { margin-bottom: 0.9rem; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.6rem; }
+.hero__etoiles { color: var(--etoile); letter-spacing: 0.08em; }
+.hero__media { display: grid; gap: 1.5rem; align-content: start; }
+.hero__photo {
+  width: 100%;
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre-forte);
+  object-fit: cover;
+}
+.hero__garantie {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.2rem 1.5rem;
+}
+.hero__garantie:hover { transform: none; }
+.hero__garantie img { width: 80px; height: auto; flex-shrink: 0; }
+.hero__garantie strong { color: var(--rouge); font-size: 1.25rem; }
+.hero__garantie p { margin: 0; font-size: 1.05rem; color: var(--gris-700); }
+
+/* Mobile / colonne unique : la photo remonte juste sous la notation Google.
+   Les deux colonnes sont aplaties (display: contents) et chaque élément
+   est réordonné dans la grille. */
+@media (max-width: 979px) {
+  .hero__grille { gap: 0; }
+  .hero__texte, .hero__media { display: contents; }
+  .hero__texte >   .hero__texte > h1 { order: 2; }
+  .hero__texte > .hero__marque { order: 3; }
+  .hero__texte > .hero__google { order: 4; }
+  .hero__media > .hero__photo { order: 5; margin-block: 0.8rem 1.4rem; }
+  .hero__texte > .hero__accroche { order: 6; }
+  .hero__texte > p { order: 7; }
+  .hero__texte > ul { order: 8; margin-bottom: 1rem; }
+  .hero__texte > .hero__actions { order: 9; }
+  .hero__media > .hero__garantie { order: 10; margin-top: 1.6rem; }
+}
+
+/* ── Bandeau de réassurance sous le hero ───────────────────────── */
+.reassurance { background: var(--bleu); color: var(--blanc); }
+.reassurance ul {
+  list-style: none;
+  padding: 0.9rem 1rem;
+  margin: 0 auto;
+  max-width: var(--conteneur);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 2.2rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.reassurance li { display: inline-flex; align-items: center; gap: 0.5em; }
+.reassurance .icone { color: var(--rouge); }
+/* Mobile : liste empilée et alignée à gauche */
+@media (max-width: 800px) {
+  .reassurance ul {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.7rem;
+  }
+}
+
+/* ── Grille services ───────────────────────────────────────────── */
+.grille-services {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  margin-top: 2.5rem;
+}
+/* 6 cartes → 2 rangées de 3 sur desktop */
+@media (min-width: 1100px) {
+  .grille-services { grid-template-columns: repeat(3, 1fr); }
+}
+.carte-service { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+.carte-service:hover { color: inherit; }
+.carte-service img { aspect-ratio: 16 / 10; object-fit: cover; width: 100%; }
+.carte-service__corps { padding: 1.3rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+.carte-service h3 { color: var(--bleu); }
+.carte-service p { font-size: 0.95rem; color: var(--gris-700); flex: 1; }
+.carte-service__lien { color: var(--rouge); font-weight: 700; font-size: 0.95rem; }
+.carte-service:hover .carte-service__lien { text-decoration: underline; }
+
+/* ── Avis clients ──────────────────────────────────────────────── */
+.grille-avis { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); margin-top: 2.5rem; }
+.avis { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.7rem; }
+.avis__entete { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.avis__nom { font-weight: 700; color: var(--bleu); }
+.avis__date { color: var(--gris-500); font-size: 0.85rem; }
+.avis__etoiles { color: var(--etoile); letter-spacing: 0.12em; }
+.avis p { font-size: 0.95rem; color: var(--gris-700); }
+.note-google { display: flex; align-items: center; justify-content: center; gap: 0.7rem; flex-wrap: wrap; margin-top: 1rem; font-weight: 600; }
+
+/* ── Nuage de villes ───────────────────────────────────────────── */
+.nuage-villes { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; list-style: none; padding: 0; }
+.nuage-villes a {
+  display: inline-block;
+  padding: 0.45em 1em;
+  background: var(--blanc);
+  border: 1px solid var(--gris-200);
+  border-radius: var(--rayon);
+  text-decoration: none;
+  color: var(--gris-700);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+.nuage-villes a:hover { border-color: var(--rouge); color: var(--rouge-fonce); background: var(--rouge-pale); }
+
+/* ── Étapes numérotées : cartes contrastées, numéro et titre
+      sur la même ligne (« 01 Démarches administratives ») ─────── */
+.etapes { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 2.5rem; }
+.etape {
+  background: var(--gris-100);
+  border: 1px solid var(--gris-200);
+  border-radius: var(--rayon);
+  padding: 1.6rem 1.5rem;
+  text-align: left;
+}
+.etape__numero {
+  display: inline-block;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--rouge);
+  line-height: 1.2;
+  margin-right: 0.55em;
+  vertical-align: baseline;
+}
+.etape h3 { display: inline; font-size: 1.15rem; line-height: 1.4; }
+.etape p { color: var(--gris-700); font-size: 0.97rem; margin-top: 0.8rem; }
+
+/* Variante sur fond bleu foncé (section "pourquoi") */
+.pourquoi .etape p { color: rgba(255, 255, 255, 0.85); }
+.pourquoi .etape {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* ── CTA final ─────────────────────────────────────────────────── */
+.cta-final { text-align: center; }
+.cta-final h2 { color: var(--blanc); }
+.cta-final p { max-width: 55ch; margin: 1rem auto 0; }
+.cta-final__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem; }
+
+/* ── Prose (contenu éditorial des pages services / villes) ─────── */
+.prose { max-width: 70ch; }
+.prose h2 { margin-block: 2.2rem 0.8rem; }
+.prose h3 { margin-block: 1.6rem 0.6rem; }
+.prose p { margin-block: 0.9rem; }
+.prose ul, .prose ol { margin-block: 0.9rem; }
+.prose li { margin-block: 0.3rem; }
+.prose img { border-radius: var(--rayon); margin-block: 1.5rem; }
+
+/* ── Fournisseurs : cartes cliquables, logos en couleurs ───────── */
+.fournisseurs__grille {
+  list-style: none;
+  padding: 0;
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+}
+.fournisseurs__grille > li {
+  flex: 1 1 180px;
+  max-width: 220px;
+}
+/* Desktop : 7 logos sur 2 rangées centrées (4 + 3) */
+@media (min-width: 880px) {
+  .fournisseurs__grille > li {
+    flex-basis: calc(25% - 1rem);
+    max-width: calc(25% - 1rem);
+  }
+}
+.fournisseurs__carte {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 1.6rem 1rem;
+  text-decoration: none;
+  height: 100%;
+  border: 1px solid var(--gris-200);
+}
+.fournisseurs__carte img {
+  height: 56px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+.fournisseurs__carte span {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--gris-700);
+  transition: color var(--transition);
+}
+.fournisseurs__carte:hover { border-color: var(--rouge); }
+.fournisseurs__carte:hover span { color: var(--rouge-fonce); }
+
+/* ── Fil d'Ariane ──────────────────────────────────────────────── */
+.fil-ariane {
+  font-size: 0.88rem;
+  color: var(--gris-500);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45em;
+  align-items: center;
+}
+.fil-ariane a { color: var(--gris-500); text-decoration: none; }
+.fil-ariane a:hover { color: var(--rouge); }
+.fil-ariane [aria-current] { color: var(--gris-700); font-weight: 600; }
+
+/* ── Accessibilité ─────────────────────────────────────────────── */
+:focus-visible { outline: 3px solid var(--rouge); outline-offset: 2px; }
+.visuallyhidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

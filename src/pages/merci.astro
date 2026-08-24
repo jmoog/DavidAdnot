@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// Page de confirmation après envoi du formulaire — exclue du sitemap (cf. astro.config)
+---
+<BaseLayout
+  title="Merci, votre demande est envoyée – David Adnot Couvreur"
+  description="Votre demande de devis a bien été transmise à David Adnot, artisan couvreur dans les Yvelines. Nous vous recontactons sous 24 à 48 h ouvrées."
+  noindex={true}
+>
+  <section class="section merci">
+    <div class="conteneur">
+      <div class="merci__icone" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+      </div>
+      <h1>Merci, votre demande est bien envoyée !</h1>
+      <p>
+        Je reviens vers vous sous <strong>24 à 48 heures ouvrées</strong> pour convenir d'une
+        visite et établir votre devis gratuit. Un email de confirmation vient de vous être
+        envoyé.
+      </p>
+      <p>
+        En cas d'urgence — fuite active, sinistre, bâchage — n'attendez pas mon rappel :
+      </p>
+      <div class="merci__actions">
+        <a href="tel:0660491430" class="btn btn--rouge">
+          <svg class="icone" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/></svg>
+          06 60 49 14 30
+        </a>
+        <a href="/" class="btn btn--bleu">Revenir à l'accueil</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .merci { text-align: center; padding-block: clamp(4rem, 10vw, 7rem); }
+  .merci h1 { margin-bottom: 1rem; }
+  .merci p { max-width: 55ch; margin-inline: auto; text-align: center; }
+  .merci__icone svg {
+    width: 72px;
+    height: 72px;
+    color: var(--rouge);
+    margin: 0 auto 1.5rem;
+  }
+  .merci__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem; }
+</style>

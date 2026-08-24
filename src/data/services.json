@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "nettoyage-demoussage-toiture",
+    "labelNav": "Nettoyage Démoussage",
+    "label": "Nettoyage et démoussage de toiture",
+    "accroche": "Brossage manuel, lavage basse pression et élimination des mousses pour préserver l'étanchéité de votre couverture.",
+    "image": "/images/nettoyage/nettoyage-demoussage-toiture-yvelines-01.webp",
+    "alt": "Nettoyage et démoussage d'une toiture en tuiles dans les Yvelines",
+    "lien": "Nettoyer et démousser mon toit"
+  },
+  {
+    "slug": "application-de-traitement-de-toiture-dans-les-yvelines-78",
+    "labelNav": "Traitement",
+    "label": "Application de traitement de toiture",
+    "accroche": "Traitements hydrofuges et anti-mousse professionnels qui imperméabilisent les matériaux et freinent la repousse des végétaux.",
+    "image": "/images/nettoyage/nettoyage-demoussage-toiture-yvelines-14.webp",
+    "alt": "Application d'un traitement hydrofuge sur une toiture dans les Yvelines",
+    "lien": "Protéger ma toiture"
+  },
+  {
+    "slug": "reparation-toiture",
+    "labelNav": "Réparations",
+    "label": "Réparation de toiture",
+    "accroche": "Tuiles ou ardoises cassées, fuites, solins et faîtages dégradés : intervention rapide pour remettre votre toit hors d'eau.",
+    "image": "/images/faitage/faitage-aretier-toiture-yvelines-01.webp",
+    "alt": "Réparation d'un faîtage de toiture en tuiles dans les Yvelines",
+    "lien": "Réparer ma toiture"
+  },
+  {
+    "slug": "renovation-toiture",
+    "labelNav": "Rénovation",
+    "label": "Rénovation de toiture",
+    "accroche": "Dépose de l'ancienne couverture, écran de sous-toiture neuf et pose d'une couverture performante, tuile ou ardoise.",
+    "image": "/images/renovation/renovation-de-toiture-yvelines-01.webp",
+    "alt": "Rénovation complète de la toiture d'un pavillon dans les Yvelines",
+    "lien": "Rénover ou remplacer ma toiture"
+  },
+  {
+    "slug": "isolation-toiture",
+    "labelNav": "Isolation",
+    "label": "Isolation de toiture",
+    "accroche": "Isolation des combles et des rampants pour plus de confort été comme hiver et des économies d'énergie durables.",
+    "image": "/images/isolation/isolation-amenagement-combles-yvelines-01.webp",
+    "alt": "Isolation de combles sous toiture dans les Yvelines",
+    "lien": "Isoler ma toiture"
+  },
+  {
+    "slug": "pose-de-velux",
+    "labelNav": "Velux",
+    "label": "Pose de fenêtres de toit Velux",
+    "accroche": "Installation et remplacement de fenêtres de toit Velux avec une étanchéité garantie et des finitions propres.",
+    "image": "/images/velux/pose-fenetre-de-toit-velux-yvelines-01.webp",
+    "alt": "Fenêtre de toit Velux posée sur une toiture en tuiles dans les Yvelines",
+    "lien": "Poser une fenêtre de toit"
+  },
+  {
+    "slug": "zinguerie-gouttieres",
+    "labelNav": "Gouttières",
+    "label": "Zinguerie et gouttières",
+    "accroche": "Pose et remplacement de gouttières zinc, alu ou PVC, solins, noues et abergements pour une évacuation d'eau fiable.",
+    "image": "/images/zinguerie/zinguerie-gouttiere-couvreur-yvelines-03.webp",
+    "alt": "Gouttière en zinc posée par David Adnot dans les Yvelines",
+    "lien": "Poser ou remplacer mes gouttières"
+  },
+  {
+    "slug": "recherche-de-fuites",
+    "labelNav": "Fuites",
+    "label": "Recherche et réparation de fuites",
+    "accroche": "Localisation précise de l'origine des infiltrations et réparation durable, avec mise hors d'eau en urgence si besoin.",
+    "image": "/images/chantiers/chantier-couverture-rambouillet-yvelines-04.webp",
+    "alt": "Recherche de fuite sur une toiture en tuiles dans les Yvelines",
+    "lien": "Trouver l'origine d'une fuite"
+  }
+]

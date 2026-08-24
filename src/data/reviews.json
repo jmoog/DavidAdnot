@@ -1,0 +1,112 @@
+{
+  "note": 4.8,
+  "nombre": 143,
+  "urlFiche": "https://www.google.com/maps/search/?api=1&query=Adnot+Couvreur+Rambouillet",
+  "avis": [
+    {
+      "auteur": "Bouaza F.",
+      "date": "Juillet 2026",
+      "note": 5,
+      "texte": "Je remercie cette entreprise qui a répondu présent lors de nos demandes, avec des détails clairs, des prix attractifs et une qualité de travail irréprochable. Nous recommandons fortement cette entreprise.",
+      "tags": ["reparation"]
+    },
+    {
+      "auteur": "Capucine Dupuy",
+      "date": "Juin 2026",
+      "note": 5,
+      "texte": "Merci à David Adnot pour son travail soigné et sa réactivité. Très satisfaite de son travail.",
+      "tags": ["reparation"]
+    },
+    {
+      "auteur": "Jonathan San",
+      "date": "Janvier 2026",
+      "note": 5,
+      "texte": "Très bon service client, équipe professionnelle et réactive. Travail soigné, délais respectés et excellent rapport qualité-prix. Je recommande vivement Adnot Couvreur pour tous vos travaux de toiture.",
+      "tags": ["renovation"]
+    },
+    {
+      "auteur": "Dominique",
+      "date": "Octobre 2025",
+      "note": 5,
+      "texte": "Nous sommes très contents de M. Adnot, qui est intervenu sur notre toiture pour réparer toutes les malfaçons laissées par un autre couvreur. Je recommande M. Adnot pour son sérieux et sa gentillesse : j'ai enfin un toit qui ne fuit plus.",
+      "tags": ["reparation", "fuite"]
+    },
+    {
+      "auteur": "Roger Rahme",
+      "date": "Octobre 2025",
+      "note": 5,
+      "texte": "Un grand merci à Adnot Couvreur de Rambouillet ! Travail impeccable, réalisé dans les délais avec beaucoup de sérieux. L'équipe est professionnelle, réactive et très sympathique. Le chantier a été bien suivi du début à la fin et tout a été laissé propre.",
+      "tags": ["renovation"]
+    },
+    {
+      "auteur": "Luzer",
+      "date": "Septembre 2025",
+      "note": 5,
+      "texte": "Entreprise très professionnelle et sérieuse. Travail de couverture réalisé avec soin et dans les délais annoncés. L'équipe est réactive, à l'écoute et donne de bons conseils pour l'entretien de la toiture.",
+      "tags": ["renovation", "nettoyage"]
+    },
+    {
+      "auteur": "Maryam Bouazza",
+      "date": "Septembre 2025",
+      "note": 5,
+      "texte": "Après avoir hésité avec d'autres entreprises, je ne regrette pas d'avoir choisi Adnot Couvreur. L'équipe est intervenue rapidement, les travaux ont été faits proprement et surtout on sent qu'il y a du suivi derrière. Très bonne expérience.",
+      "tags": ["renovation"]
+    },
+    {
+      "auteur": "Gabriel Morillon",
+      "date": "Juin 2025",
+      "note": 5,
+      "texte": "Très bon travail de la part de M. Adnot : les défauts de toiture ont été correctement réparés et le démoussage très bien fait également. Je recommande.",
+      "tags": ["nettoyage", "reparation"]
+    },
+    {
+      "auteur": "Yasmine Ziani",
+      "date": "Juin 2025",
+      "note": 5,
+      "texte": "Devis abordable par rapport aux concurrents et travail minutieusement réalisé. Je recommanderais Monsieur Adnot.",
+      "tags": ["devis"]
+    },
+    {
+      "auteur": "Fabien Marchesi",
+      "date": "Mars 2025",
+      "note": 5,
+      "texte": "Très satisfait de l'intervention à mon domicile pour refaire en bardage PVC les jouées de mes fenêtres de toit. Travail propre et professionnel.",
+      "tags": ["velux"]
+    },
+    {
+      "auteur": "Elodie Plaine",
+      "date": "Décembre 2024",
+      "note": 5,
+      "texte": "Entreprise très réactive et sérieuse. Le travail est réalisé avec soin, ce qui est rare de nos jours ! Je recommande !",
+      "tags": ["reparation"]
+    },
+    {
+      "auteur": "Ced GN",
+      "date": "Mars 2024",
+      "note": 5,
+      "texte": "Prise en charge très rapide suite à une infiltration sur mon toit ! Très accessible et sympathique. Les deux ouvriers sont intervenus rapidement, ils sont courtois et expliquent bien leur intervention. Je recommande !",
+      "tags": ["fuite", "reparation"]
+    },
+    {
+      "auteur": "Christophe Ooghe",
+      "date": "Février 2024",
+      "note": 5,
+      "texte": "M. Adnot et ses collègues sont intervenus rapidement sur le toit de la maison de ma mère. Devis rapide et clair, conseils et explications, réalisation professionnelle et propre. Top !",
+      "tags": ["reparation", "devis"]
+    },
+    {
+      "auteur": "Kelai Smail",
+      "date": "Septembre 2024",
+      "note": 5,
+      "texte": "Un travail de qualité, dans le respect des normes et réalisé dans les délais annoncés. Je recommande vivement l'entreprise Adnot couverture.",
+      "tags": ["renovation"]
+    },
+    {
+      "auteur": "Xavier Beurtey",
+      "date": "Juin 2024",
+      "note": 5,
+      "texte": "Je recommande très chaleureusement l'entreprise Adnot couvreur qui a superbement géré mon chantier malgré des conditions climatiques vraiment compliquées ! Bravo à son équipe.",
+      "tags": ["renovation"]
+    }
+  ]
+}

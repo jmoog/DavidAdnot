@@ -1,0 +1,28 @@
+---
+// Fil d'Ariane avec données structurées BreadcrumbList (SEO).
+// Usage : <FilAriane items={[{ label: 'Accueil', href: '/' }, { label: 'Page courante' }]} />
+export interface Props {
+  items: Array<{ label: string; href?: string }>;
+}
+const { items } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((it, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: it.label,
+    ...(it.href ? { item: new URL(it.href, Astro.site).toString() } : {}),
+  })),
+};
+---
+<nav class="fil-ariane" aria-label="Fil d'Ariane">
+  {items.map((it, i) => (
+    <>
+      {i > 0 && <span aria-hidden="true">›</span>}
+      {it.href ? <a href={it.href}>{it.label}</a> : <span aria-current="page">{it.label}</span>}
+    </>
+  ))}
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

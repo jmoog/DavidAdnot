@@ -1,0 +1,189 @@
+---
+// Header double barre, repris du design système du site :
+// 1. barre rouge — téléphone (bouton blanc) + liens institutionnels
+// 2. barre claire — logo + menu services
+---
+<header class="entete">
+  <div class="entete__topbar">
+    <div class="conteneur entete__topbar-int">
+      <a href="tel:0660491430" class="entete__tel">
+        <svg class="icone" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/></svg>
+        06 60 49 14 30
+      </a>
+      <nav aria-label="Navigation secondaire">
+        <ul class="entete__liens">
+          <li><a href="/">Accueil</a></li>
+          <li><a href="/a-propos-de-m-adnot-artisan-couvreur/">À propos</a></li>
+          <li><a href="/services-adnot-couvreur/">Prestations</a></li>
+          <li><a href="/galerie-photo/">Galerie Photo</a></li>
+          <li><a href="/contact/">Devis Gratuit</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="entete__principal">
+    <div class="conteneur entete__principal-int">
+      <a href="/" class="entete__marque" aria-label="David Adnot Artisan Couvreur — retour à l'accueil">
+        <img src="/images/logo-david-adnot-artisan-couvreur.webp" alt="Logo David Adnot — Artisan Couvreur dans les Yvelines" width="90" height="90" />
+      </a>
+
+      <nav class="entete__nav" aria-label="Navigation principale">
+        <button class="entete__burger" type="button" aria-expanded="false" aria-controls="menu-principal">
+          <span class="visuallyhidden">Menu</span>
+          <svg class="icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <ul id="menu-principal" class="entete__menu">
+          <li><a href="/nettoyage-demoussage-toiture/">Nettoyage Démoussage</a></li>
+          <li><a href="/application-de-traitement-de-toiture-dans-les-yvelines-78/">Traitement de toiture</a></li>
+          <li><a href="/reparation-toiture/">Réparations</a></li>
+          <li><a href="/renovation-toiture/">Rénovation</a></li>
+          <li><a href="/isolation-toiture/">Isolation</a></li>
+          <li><a href="/pose-de-velux/">Velux</a></li>
+          <li class="entete__menu-cta"><a href="tel:0660491430" class="btn btn--rouge">06 60 49 14 30</a></li>
+          <li class="entete__menu-cta"><a href="/contact/" class="btn btn--bleu">Devis gratuit</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  .entete {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: var(--ombre);
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  /* Masqué après 900 px de scroll sur mobile (géré par le script) */
+  .entete--cachee { transform: translateY(-100%); }
+
+  /* ── Barre 1 : rouge ──────────────────────────────────────── */
+  .entete__topbar { background: var(--rouge); }
+  .entete__topbar-int {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-block: 0.55rem;
+  }
+  .entete__tel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    background: var(--blanc);
+    color: var(--bleu);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    padding: 0.45em 1em;
+    border-radius: var(--rayon);
+    white-space: nowrap;
+  }
+  .entete__tel:hover { color: var(--rouge-fonce); }
+  .entete__liens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .entete__liens a {
+    color: var(--blanc);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+  .entete__liens a:hover { text-decoration: underline; color: var(--blanc); }
+
+  /* ── Barre 2 : claire, logo + services ────────────────────── */
+  .entete__principal { background: var(--bleu-pale); }
+  .entete__principal-int {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 0.4rem;
+  }
+  .entete__marque img { height: 72px; width: auto; }
+
+  .entete__menu {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .entete__menu a:not(.btn) {
+    text-decoration: none;
+    color: var(--bleu);
+    font-weight: 600;
+    font-size: 0.98rem;
+    transition: color var(--transition);
+  }
+  .entete__menu a:not(.btn):hover { color: var(--rouge); }
+  .entete__menu-cta { display: none; }
+
+  .entete__burger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--bleu);
+    padding: 0.4rem;
+    cursor: pointer;
+  }
+  .entete__burger .icone { width: 1.9rem; height: 1.9rem; }
+
+  @media (max-width: 1080px) {
+    .entete__liens { display: none; }
+    .entete__topbar-int { justify-content: center; }
+  }
+  /* Mobile : pas de numéro en haut → barre rouge entièrement masquée */
+  @media (max-width: 800px) {
+    .entete__topbar { display: none; }
+    .entete__burger { display: block; }
+    .entete__menu {
+      display: none;
+      position: absolute;
+      inset-inline: 0;
+      top: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      background: var(--blanc);
+      box-shadow: var(--ombre-forte);
+      padding: 0.5rem 1rem 1.2rem;
+    }
+    .entete__menu.ouvert { display: flex; }
+    .entete__menu li { border-bottom: 1px solid var(--gris-100); }
+    .entete__menu a:not(.btn) { display: block; padding: 0.8em 0.2em; font-size: 1.02rem; }
+    .entete__menu-cta { display: block; border-bottom: none !important; padding-top: 0.8rem; }
+    .entete__menu-cta .btn { width: 100%; }
+  }
+</style>
+
+<script>
+  const burger = document.querySelector('.entete__burger');
+  const menu = document.getElementById('menu-principal');
+  burger?.addEventListener('click', () => {
+    const ouvert = menu?.classList.toggle('ouvert');
+    burger.setAttribute('aria-expanded', String(Boolean(ouvert)));
+  });
+
+  // Mobile : le header s'efface après 900 px de scroll (sauf menu ouvert)
+  const entete = document.querySelector('.entete');
+  const mobile = window.matchMedia('(max-width: 800px)');
+  let tick = false;
+  window.addEventListener('scroll', () => {
+    if (tick) return;
+    tick = true;
+    requestAnimationFrame(() => {
+      const cacher = mobile.matches && window.scrollY > 900 && !menu?.classList.contains('ouvert');
+      entete?.classList.toggle('entete--cachee', Boolean(cacher));
+      tick = false;
+    });
+  }, { passive: true });
+</script>

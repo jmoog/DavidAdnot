@@ -1,14 +1,58 @@
 ---
-// Fait apparaître en fondu les éléments [data-apparition] au défilement.
+// Animations sobres du site, chargées par BaseLayout sur toutes les pages.
+// — Au chargement : le héro apparaît en fondu léger, élément par élément (CSS, global.css).
+// — Au défilement : les blocs des sections suivantes glissent de quelques pixels en fondu ;
+//   dans les grilles (cartes, étapes…), les éléments arrivent l'un après l'autre.
+// Les éléments [data-apparition] posés à la main restent pris en charge.
+// Sans JS ou avec « réduire les animations », tout reste visible immédiatement.
 ---
 <script>
-  const els = document.querySelectorAll<HTMLElement>('[data-apparition]');
-  if ('IntersectionObserver' in window && els.length) {
+  const racine = document.documentElement;
+  const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduit && 'IntersectionObserver' in window) {
+    const cibles = new Set<HTMLElement>();
+    const ajouter = (el: HTMLElement, rang = 0) => {
+      if (cibles.has(el) || el.closest('.hero, .ack, .contact-flottant')) return;
+      el.style.setProperty('--rang', String(Math.min(rang, 5)));
+      cibles.add(el);
+    };
+
+    // Blocs posés à la main
+    document.querySelectorAll<HTMLElement>('[data-apparition]').forEach((el) => ajouter(el));
+
+    // Blocs des sections du contenu (hors héro) : enfants directs des conteneurs ;
+    // une grille ou une liste de cartes est révélée élément par élément.
+    document.querySelectorAll<HTMLElement>('main section:not(.hero) .conteneur > *').forEach((bloc) => {
+      if (bloc.closest('[data-apparition]') || bloc.querySelector('[data-apparition]')) return;
+      const affichage = getComputedStyle(bloc).display;
+      const enfants = Array.from(bloc.children) as HTMLElement[];
+      const estGrille = (affichage === 'grid' || affichage === 'flex') && enfants.length >= 3;
+      if (estGrille) enfants.forEach((el, i) => ajouter(el, i));
+      else ajouter(bloc);
+    });
+
     const io = new IntersectionObserver((entrees) => {
       entrees.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('apparu'); io.unobserve(e.target); }
+        if (e.isIntersecting) {
+          const el = e.target as HTMLElement;
+          el.classList.add('apparu');
+          io.unobserve(el);
+          // Animation terminée : on rend la main aux styles propres de l'élément (survols…)
+          const rang = Number(el.style.getPropertyValue('--rang') || 0);
+          setTimeout(() => {
+            el.classList.remove('apparition-prete', 'apparu');
+            el.style.removeProperty('--rang');
+          }, 1000 + rang * 90);
+        }
       });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    els.forEach((el) => { el.classList.add('apparition-prete'); io.observe(el); });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+
+    cibles.forEach((el) => {
+      el.classList.add('apparition-prete');
+      io.observe(el);
+    });
+  } else {
+    racine.classList.remove('anim');
   }
 </script>

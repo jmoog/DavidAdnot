@@ -428,6 +428,33 @@ h3 { font-size: 1.2rem; }
 }
 
 /* ── Animations d'apparition (activées par JS, contenu visible sans JS) ── */
-.apparition-prete { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+/* Au défilement : léger glissement vers le haut + fondu, décalé dans les grilles (--rang) */
+.apparition-prete {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--rang, 0) * 90ms);
+}
 .apparition-prete.apparu { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .apparition-prete { opacity: 1; transform: none; } }
+
+/* Au chargement : en-tête puis héro, élément par élément (classe .anim posée dans <head>) */
+@keyframes apparition-haut { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes apparition-fondu { from { opacity: 0; } to { opacity: 1; } }
+@keyframes apparition-photo { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+.anim .entete { animation: apparition-fondu 0.7s ease both; }
+.anim .hero__texte > *,
+.anim .hero__media > * { animation: apparition-haut 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.anim .hero__texte > :nth-child(1) { animation-delay: 0.10s; }
+.anim .hero__texte > :nth-child(2) { animation-delay: 0.20s; }
+.anim .hero__texte > :nth-child(3) { animation-delay: 0.30s; }
+.anim .hero__texte > :nth-child(4) { animation-delay: 0.40s; }
+.anim .hero__texte > :nth-child(n+5) { animation-delay: 0.50s; }
+.anim .hero__media > .hero__photo { animation: apparition-photo 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; }
+.anim .hero__media > :nth-child(n+2) { animation-delay: 0.45s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .apparition-prete { opacity: 1; transform: none; transition: none; }
+  .anim .entete, .anim .hero__texte > *, .anim .hero__media > * { animation: none; }
+}

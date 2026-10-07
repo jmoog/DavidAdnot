@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroPage from '../components/HeroPage.astro';
 import AvisCarrousel from '../components/AvisCarrousel.astro';
 import CtaDevis from '../components/CtaDevis.astro';
+import RealisationsCartes from '../components/RealisationsCartes.astro';
 
 const title = 'Rénovation de toiture dans les Yvelines — David Adnot';
 const description = "Couverture ancienne, tuiles poreuses ? Je dépose, contrôle la charpente et pose une couverture neuve, tuile ou ardoise. Devis gratuit, +20 ans d'expérience.";
@@ -129,6 +130,8 @@ const extraSchemas = [
       </p>
     </div>
   </section>
+
+  <RealisationsCartes page="/renovation-toiture/" />
 
   <CtaDevis />
 </BaseLayout>

@@ -10,12 +10,19 @@ export interface Props {
   imageAlt: string;
   /** Libellé de la page dans le fil d'Ariane */
   ariane: string;
+  /** Niveau intermédiaire facultatif du fil d'Ariane (ex. Réalisations) */
+  parent?: { label: string; href: string };
 }
-const { h1, image, imageAlt, ariane } = Astro.props;
+const { h1, image, imageAlt, ariane, parent } = Astro.props;
+const ariane_items = [
+  { label: 'Accueil', href: '/' },
+  ...(parent ? [parent] : []),
+  { label: ariane },
+];
 ---
 <section class="hero">
   <div class="conteneur">
-    <FilAriane items={[{ label: 'Accueil', href: '/' }, { label: ariane }]} />
+    <FilAriane items={ariane_items} />
   </div>
   <div class="conteneur hero__grille">
     <div class="hero__texte">

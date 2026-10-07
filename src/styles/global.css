@@ -426,3 +426,8 @@ h3 { font-size: 1.2rem; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* ── Animations d'apparition (activées par JS, contenu visible sans JS) ── */
+.apparition-prete { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.apparition-prete.apparu { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .apparition-prete { opacity: 1; transform: none; } }

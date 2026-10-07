@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FilAriane from '../components/FilAriane.astro';
 import CtaDevis from '../components/CtaDevis.astro';
+import RealisationsCartes from '../components/RealisationsCartes.astro';
 import services from '../data/services.json';
 import villes from '../data/villes.json';
 
@@ -43,6 +44,8 @@ const description = "Toutes les prestations de David Adnot dans les Yvelines : n
       </ul>
     </div>
   </section>
+
+  <RealisationsCartes page="/services-adnot-couvreur/" />
 
   <CtaDevis />
 </BaseLayout>

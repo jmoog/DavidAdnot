@@ -1,5 +1,11 @@
 ---
 // Bandeau CTA devis — photo de chantier à gauche, panneau bleu à droite.
+// titre / texte facultatifs : sans eux, le bandeau garde son texte d'origine.
+export interface Props {
+  titre?: string;
+  texte?: string;
+}
+const { titre, texte } = Astro.props;
 ---
 <section class="cta-devis">
   <div class="conteneur cta-devis__grille">
@@ -12,12 +18,12 @@
       height="627"
     />
     <div class="cta-devis__panneau">
-      <h2>Contactez votre expert de la toiture à Rambouillet</h2>
-      <p class="cta-devis__texte">
+      <h2>{titre ?? 'Contactez votre expert de la toiture à Rambouillet'}</h2>
+      {texte ? <p class="cta-devis__texte">{texte}</p> : <p class="cta-devis__texte">
         Un toit qui fuit, des tuiles à remplacer ou un projet de rénovation ? Je suis là pour vous.
         J'interviens à Rambouillet et dans les Yvelines, rapidement et même en urgence.
         Déplacement, conseil et devis détaillé gratuits, sans engagement.
-      </p>
+      </p>}
       <ul>
         <li>Un artisan couvreur de père en fils.</li>
         <li>Plus de 20 ans d'expérience.</li>

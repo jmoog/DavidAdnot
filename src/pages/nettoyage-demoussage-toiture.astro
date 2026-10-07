@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroPage from '../components/HeroPage.astro';
 import AvisCarrousel from '../components/AvisCarrousel.astro';
 import CtaDevis from '../components/CtaDevis.astro';
+import RealisationsCartes from '../components/RealisationsCartes.astro';
 
 const title = 'Nettoyage & Démoussage Toiture M. Adnot - Expert Toiture 78';
 const description = 'David Adnot nettoie et démousse votre toiture dans les Yvelines. Intervention professionnelle pour une toiture propre. Devis gratuit.';
@@ -220,6 +221,8 @@ const extraSchemas = [
   </section>
 
   <!-- ── CTA devis ────────────────────────────────────────────── -->
+  <RealisationsCartes page="/nettoyage-demoussage-toiture/" />
+
   <CtaDevis />
 </BaseLayout>
 

@@ -1,0 +1,128 @@
+---
+// Page « réalisation » : un chantier = une page (contenu dans src/content/realisations).
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from '../../components/HeroPage.astro';
+import CtaDevis from '../../components/CtaDevis.astro';
+import RealisationsCartes from '../../components/RealisationsCartes.astro';
+import Apparition from '../../components/Apparition.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('realisations');
+  return items.map((r) => ({ params: { slug: r.data.slug }, props: { r } }));
+}
+
+const { r } = Astro.props;
+const d = r.data;
+const { Content } = await render(r);
+const base = `/images/realisations/${d.slug}/`;
+const principale = d.photos.find((p) => p.src === d.photoPrincipale) ?? d.photos[0];
+const site = 'https://www.adnot-couvreur.fr';
+
+const extraSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: d.h1,
+    description: d.description,
+    datePublished: d.date,
+    image: d.photos.map((p) => `${site}${base}${p.src}`),
+    url: `${site}/realisations/${d.slug}/`,
+    author: { '@id': `${site}/#localbusiness` },
+    publisher: { '@id': `${site}/#localbusiness` },
+    about: {
+      '@type': 'Service',
+      name: d.prestations[0],
+      provider: { '@id': `${site}/#localbusiness` },
+      areaServed: { '@type': 'City', name: `${d.lieu} (${d.codePostal})` },
+    },
+    contentLocation: {
+      '@type': 'Place',
+      name: d.lieu,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: d.lieu,
+        postalCode: d.codePostal,
+        addressRegion: d.departement,
+        addressCountry: 'FR',
+      },
+    },
+  },
+];
+
+const ctaTexte = `Vous souhaitez refaire, réparer ou entretenir votre toiture à ${d.lieu} ou dans les environs ? Le devis est gratuit et sans engagement.`;
+---
+<BaseLayout title={d.title} description={d.description} extraSchemas={extraSchemas}>
+  <HeroPage
+    h1={d.h1}
+    image={base + principale.src}
+    imageAlt={principale.alt}
+    ariane={d.h1}
+    parent={{ label: 'Réalisations', href: '/realisations/' }}
+  >
+    <p class="hero__accroche">
+      Un chantier mené par David Adnot, <strong>artisan couvreur à {d.lieu}</strong> et dans le
+      secteur de Rambouillet.
+    </p>
+    <ul class="fiche-chantier">
+      <li><span>Lieu</span>{d.lieu} ({d.codePostal})</li>
+      <li><span>Date</span>{d.periode}</li>
+      <li><span>Travaux</span>{d.prestations.join(' · ')}</li>
+    </ul>
+  </HeroPage>
+
+  <section class="section realisation-section">
+    <div class="conteneur">
+      <div class="realisation-texte" data-apparition>
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  {d.photos.length > 1 && (
+    <section class="section section--gris">
+      <div class="conteneur">
+        <h2>Le chantier en photos</h2>
+        <div class="realisation-photos">
+          {d.photos.map((p) => (
+            <figure data-apparition>
+              <a href={base + p.src} target="_blank" rel="noopener">
+                <img src={base + p.src} alt={p.alt} loading="lazy" decoding="async" width="800" height="600" />
+              </a>
+              <figcaption>{p.alt}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <RealisationsCartes slugs={d.liees} titre="D'autres chantiers près de chez vous" fond={d.photos.length > 1 ? 'blanc' : 'gris'} />
+
+  <CtaDevis titre={d.cta} texte={ctaTexte} />
+  <Apparition />
+</BaseLayout>
+
+<style>
+  .fiche-chantier { list-style: none; padding: 0; display: grid; gap: 0.35rem; margin-top: 1rem; }
+  .fiche-chantier li { display: grid; grid-template-columns: 5.5rem 1fr; gap: 0.6rem; color: var(--gris-700); }
+  .fiche-chantier span { font-weight: 700; color: var(--bleu); }
+
+  .realisation-texte { max-width: 74ch; }
+  .realisation-texte :global(p) { line-height: 1.75; margin-bottom: 1.1rem; }
+  .realisation-texte :global(h2) { margin-top: 2.4rem; margin-bottom: 0.9rem; }
+  .realisation-texte :global(h2:first-child) { margin-top: 0; }
+  .realisation-texte :global(a) { color: var(--bleu-accent); font-weight: 600; }
+
+  .realisation-photos {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    margin-top: 1.5rem;
+  }
+  .realisation-photos figure { margin: 0; }
+  .realisation-photos a { display: block; border-radius: var(--rayon); overflow: hidden; box-shadow: var(--ombre); aspect-ratio: 4 / 3; background: var(--gris-100); }
+  .realisation-photos img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition); }
+  .realisation-photos a:hover img { transform: scale(1.04); }
+  .realisation-photos figcaption { font-size: 0.88rem; color: var(--gris-500); margin-top: 0.55rem; line-height: 1.45; }
+</style>

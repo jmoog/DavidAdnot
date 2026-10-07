@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroPage from '../components/HeroPage.astro';
 import AvisCarrousel from '../components/AvisCarrousel.astro';
 import CtaDevis from '../components/CtaDevis.astro';
+import RealisationsCartes from '../components/RealisationsCartes.astro';
 
 const title = 'Zinguerie et gouttières dans les Yvelines — Pose, réparation';
 const description = "Pose et remplacement de gouttières zinc, alu ou PVC, solins et abergements : une évacuation d'eau fiable pour votre toiture. Artisan à Rambouillet (78).";
@@ -102,6 +103,8 @@ const extraSchemas = [
       />
     </div>
   </section>
+
+  <RealisationsCartes page="/zinguerie-gouttieres/" />
 
   <CtaDevis />
 </BaseLayout>

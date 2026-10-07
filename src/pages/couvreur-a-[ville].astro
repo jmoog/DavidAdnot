@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import FilAriane from '../components/FilAriane.astro';
 import AvisCarrousel from '../components/AvisCarrousel.astro';
 import CtaDevis from '../components/CtaDevis.astro';
+import RealisationsCartes from '../components/RealisationsCartes.astro';
 import services from '../data/services.json';
 import villes from '../data/villes.json';
 import reviews from '../data/reviews.json';
@@ -175,6 +176,9 @@ const extraSchemas = [
       />
     </div>
   </section>
+
+  <!-- ── Réalisations dans la commune et aux alentours ─────────── -->
+  <RealisationsCartes ville={ville.slug} lieu={ville.nom} fond="gris" />
 
   <!-- ── Urbanisme ─────────────────────────────────────────────── -->
   <section class="section section--bleute urbanisme">

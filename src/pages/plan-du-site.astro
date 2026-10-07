@@ -3,6 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import FilAriane from '../components/FilAriane.astro';
 import services from '../data/services.json';
 import villes from '../data/villes.json';
+import { getCollection } from 'astro:content';
+
+const realisations = (await getCollection('realisations')).sort((a, b) => b.data.date.localeCompare(a.data.date));
 
 const title = 'Plan du site — David Adnot, couvreur dans les Yvelines';
 const description = "Toutes les pages du site de votre artisan couvreur dans les Yvelines : services de toiture, zone d'intervention, devis gratuit.";
@@ -11,6 +14,7 @@ const pagesPrincipales = [
   { label: 'Accueil — Couvreur dans les Yvelines', href: '/' },
   { label: 'À propos de M. Adnot, artisan couvreur', href: '/a-propos-de-m-adnot-artisan-couvreur/' },
   { label: 'Toutes mes prestations', href: '/services-adnot-couvreur/' },
+  { label: 'Mes réalisations dans les Yvelines', href: '/realisations/' },
   { label: 'Galerie photo de mes chantiers', href: '/galerie-photo/' },
   { label: 'Devis gratuit et contact', href: '/contact/' },
 ];
@@ -55,6 +59,15 @@ const pagesLegales = [
           <ul>
             {villes.map((v) => (
               <li><a href={`/couvreur-a-${v.slug}/`}>Couvreur à {v.nom}</a></li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="plan__bloc">
+          <h2>Mes réalisations</h2>
+          <ul>
+            {realisations.map((r) => (
+              <li><a href={`/realisations/${r.data.slug}/`}>{r.data.h1}</a></li>
             ))}
           </ul>
         </section>

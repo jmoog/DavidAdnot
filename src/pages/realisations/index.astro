@@ -1,0 +1,44 @@
+---
+// Index des réalisations : tous les chantiers, du plus récent au plus ancien.
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FilAriane from '../../components/FilAriane.astro';
+import CtaDevis from '../../components/CtaDevis.astro';
+import RealisationsCartes from '../../components/RealisationsCartes.astro';
+
+const title = 'Réalisations de couvreur dans les Yvelines (78) - David Adnot';
+const description =
+  "Rénovations, faîtages, raccords, nettoyages de toiture : les chantiers de David Adnot à Rambouillet, Sonchamp, Auffargis, Poigny-la-Forêt et dans les Yvelines.";
+
+const items = await getCollection('realisations');
+const slugs = items
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .map((r) => r.data.slug);
+const communes = [...new Set(items.map((r) => r.data.lieu))];
+---
+<BaseLayout title={title} description={description}>
+  <section class="section realisations-entete">
+    <div class="conteneur">
+      <FilAriane items={[{ label: 'Accueil', href: '/' }, { label: 'Réalisations' }]} />
+      <h1>Mes réalisations de couvreur dans les Yvelines</h1>
+      <p class="realisations-entete__intro">
+        Chaque page raconte un chantier réel, photos à l'appui : où il s'est déroulé, ce que la
+        toiture montrait et ce qui a été fait. Rénovations complètes, faîtages, raccords contre un
+        mur, nettoyages : de quoi vous faire une idée précise de mon travail à {communes.length > 1 ? `${communes.slice(0, -1).join(', ')} et ${communes.at(-1)}` : communes[0]}.
+      </p>
+    </div>
+  </section>
+
+  <RealisationsCartes slugs={slugs} titre="Tous mes chantiers, du plus récent au plus ancien" max={100} lienIndex={false} fond="gris" />
+
+  <CtaDevis
+    titre="Contactez votre couvreur à Rambouillet"
+    texte="Votre toiture fuit, se dégrade ou demande un entretien ? J'interviens à Rambouillet et dans toutes les Yvelines. Le devis est gratuit et sans engagement."
+  />
+</BaseLayout>
+
+<style>
+  .realisations-entete { padding-bottom: 1rem; }
+  .realisations-entete h1 { margin-top: 1rem; }
+  .realisations-entete__intro { max-width: 72ch; margin-top: 1rem; color: var(--gris-700); line-height: 1.7; }
+</style>

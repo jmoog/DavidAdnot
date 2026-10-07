@@ -1,0 +1,98 @@
+---
+// Bloc de cartes « réalisations » : maillage vers /realisations/<slug>/.
+// Le lien porte sur le titre (H3) ; la carte entière est cliquable via ::after.
+// Usage : <RealisationsCartes slugs={[...]} titre="..." /> ou
+//         <RealisationsCartes page="/renovation-toiture/" /> (lit src/data/maillage-realisations.json)
+//         <RealisationsCartes ville="rambouillet" lieu="Rambouillet" />
+import { getCollection } from 'astro:content';
+import Apparition from "./Apparition.astro";
+import maillage from '../data/maillage-realisations.json';
+
+export interface Props {
+  slugs?: string[];
+  page?: string;
+  ville?: string;
+  lieu?: string;
+  titre?: string;
+  max?: number;
+  fond?: 'blanc' | 'gris';
+  lienIndex?: boolean;
+}
+
+const TITRES_SERVICES: Record<string, string> = {
+  '/renovation-toiture/': 'Mes chantiers de rénovation de toiture',
+  '/isolation-toiture/': "Des toitures isolées pendant leur réfection",
+  '/pose-de-velux/': 'Des fenêtres de toit posées et raccordées',
+  '/reparation-toiture/': 'Mes chantiers de réparation de toiture',
+  '/zinguerie-gouttieres/': 'Gouttières, solins et raccords : mes chantiers',
+  '/recherche-de-fuites/': "Des infiltrations traitées à la source",
+  '/nettoyage-demoussage-toiture/': 'Mes chantiers de nettoyage de toiture',
+  '/application-de-traitement-de-toiture-dans-les-yvelines-78/': 'Des toitures nettoyées puis protégées',
+  '/services-adnot-couvreur/': 'Quelques chantiers récents',
+};
+
+const { page, ville, lieu, max = 6, fond = 'blanc', lienIndex = true } = Astro.props;
+const villes = maillage.villes as Record<string, string[]>;
+const services = maillage.services as Record<string, string[]>;
+const slugs: string[] =
+  Astro.props.slugs ?? (page ? services[page] : ville ? villes[ville] : undefined) ?? [];
+const titre =
+  Astro.props.titre ??
+  (page ? TITRES_SERVICES[page] : lieu ? `Mes réalisations à ${lieu} et aux alentours` : 'Mes réalisations');
+
+const toutes = await getCollection('realisations');
+const cartes = slugs
+  .map((s) => toutes.find((r) => r.data.slug === s))
+  .filter((r): r is NonNullable<typeof r> => Boolean(r))
+  .slice(0, max);
+---
+{cartes.length > 0 && (
+  <section class={`section realisations-bloc${fond === 'gris' ? ' section--gris' : ''}`}>
+    <div class="conteneur">
+      <h2>{titre}</h2>
+      <div class="realisations-grille">
+        {cartes.map((r) => (
+          <article class="carte realisation-carte" data-apparition>
+            <img
+              src={`/images/realisations/${r.data.slug}/${r.data.photoPrincipale}`}
+              alt={r.data.photos.find((p) => p.src === r.data.photoPrincipale)?.alt ?? r.data.h1}
+              loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
+            />
+            <div class="realisation-carte__corps">
+              <h3><a href={`/realisations/${r.data.slug}/`}>{r.data.h1}</a></h3>
+              <p class="realisation-carte__lieu">{r.data.lieu} · {r.data.periode}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      {lienIndex && (
+        <p class="realisations-bloc__suite">
+          <a href="/realisations/">Voir toutes mes réalisations dans les Yvelines</a>
+        </p>
+      )}
+    </div>
+  </section>
+)}
+<Apparition />
+
+<style>
+  .realisations-grille {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    margin-top: 1.5rem;
+  }
+  .realisation-carte { position: relative; display: flex; flex-direction: column; }
+  .realisation-carte img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+  .realisation-carte__corps { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; gap: 0.45rem; }
+  .realisation-carte h3 { font-size: 1.05rem; line-height: 1.35; color: var(--bleu); }
+  .realisation-carte h3 a { color: inherit; text-decoration: none; }
+  .realisation-carte h3 a::after { content: ""; position: absolute; inset: 0; }
+  .realisation-carte:hover h3 a { text-decoration: underline; }
+  .realisation-carte__lieu { margin: 0; font-size: 0.92rem; color: var(--gris-500); }
+  .realisations-bloc__suite { margin-top: 1.8rem; }
+  .realisations-bloc__suite a { font-weight: 700; color: var(--rouge); }
+</style>

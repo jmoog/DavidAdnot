@@ -1,0 +1,94 @@
+{
+  "_usage": "Blocs « Réalisations » à afficher sur les pages villes et services (liens retour vers /realisations/<slug>/). Chaque réalisation porte aussi ses propres liens : pageVille, pagesServices et liees (3 réalisations proches) dans src/content/realisations/*.md.",
+  "villes": {
+    "rambouillet": [
+      "remplacement-couverture-tuiles-rambouillet",
+      "couverture-tuiles-terre-cuite-isolation-velux-rambouillet",
+      "toiture-maison-de-ville-rambouillet",
+      "faitage-closoir-ventile-rambouillet",
+      "faitage-tuiles-anciennes-rambouillet",
+      "nettoyage-toiture-maison-velux-rambouillet",
+      "nettoyage-toiture-tuiles-anciennes-rambouillet",
+      "rive-scellee-toiture-tuiles-rambouillet",
+      "renovation-toiture-lotissement-rambouillet",
+      "mur-pignon-raccord-toiture-auffargis",
+      "nettoyage-toiture-ardoises-poigny-la-foret"
+    ],
+    "sonchamp": [
+      "toiture-tuiles-plates-maison-meuliere-sonchamp",
+      "remplacement-couverture-tuiles-rambouillet",
+      "renovation-toiture-lotissement-rambouillet"
+    ],
+    "vieille-eglise-en-yvelines": [
+      "mur-pignon-raccord-toiture-auffargis",
+      "remplacement-couverture-tuiles-rambouillet",
+      "faitage-closoir-ventile-rambouillet"
+    ],
+    "cernay-la-ville": [
+      "peinture-bois-debord-toit-dampierre-en-yvelines",
+      "gouttieres-toiture-bardeaux-saint-remy-les-chevreuse",
+      "toiture-tuiles-plates-maison-meuliere-sonchamp"
+    ],
+    "clairefontaine-en-yvelines": [
+      "toiture-tuiles-plates-maison-meuliere-sonchamp",
+      "nettoyage-toiture-ardoises-poigny-la-foret",
+      "faitage-tuiles-anciennes-rambouillet"
+    ],
+    "saint-arnoult-en-yvelines": [
+      "toiture-tuiles-plates-maison-meuliere-sonchamp",
+      "remplacement-couverture-tuiles-rambouillet",
+      "nettoyage-toiture-tuiles-anciennes-rambouillet"
+    ]
+  },
+  "services": {
+    "/renovation-toiture/": [
+      "toiture-tuiles-plates-maison-meuliere-sonchamp",
+      "remplacement-couverture-tuiles-rambouillet",
+      "couverture-tuiles-terre-cuite-isolation-velux-rambouillet",
+      "renovation-toiture-lotissement-rambouillet",
+      "toiture-maison-de-ville-rambouillet"
+    ],
+    "/isolation-toiture/": [
+      "couverture-tuiles-terre-cuite-isolation-velux-rambouillet",
+      "toiture-tuiles-plates-maison-meuliere-sonchamp",
+      "renovation-toiture-lotissement-rambouillet"
+    ],
+    "/pose-de-velux/": [
+      "couverture-tuiles-terre-cuite-isolation-velux-rambouillet",
+      "nettoyage-toiture-maison-velux-rambouillet"
+    ],
+    "/reparation-toiture/": [
+      "faitage-closoir-ventile-rambouillet",
+      "faitage-tuiles-anciennes-rambouillet",
+      "mur-pignon-raccord-toiture-auffargis",
+      "rive-scellee-toiture-tuiles-rambouillet",
+      "toiture-maison-de-ville-rambouillet"
+    ],
+    "/zinguerie-gouttieres/": [
+      "mur-pignon-raccord-toiture-auffargis",
+      "gouttieres-toiture-bardeaux-saint-remy-les-chevreuse",
+      "rive-scellee-toiture-tuiles-rambouillet",
+      "peinture-bois-debord-toit-dampierre-en-yvelines"
+    ],
+    "/recherche-de-fuites/": [
+      "mur-pignon-raccord-toiture-auffargis",
+      "gouttieres-toiture-bardeaux-saint-remy-les-chevreuse"
+    ],
+    "/nettoyage-demoussage-toiture/": [
+      "nettoyage-toiture-maison-velux-rambouillet",
+      "nettoyage-toiture-tuiles-anciennes-rambouillet",
+      "nettoyage-toiture-ardoises-poigny-la-foret"
+    ],
+    "/application-de-traitement-de-toiture-dans-les-yvelines-78/": [
+      "nettoyage-toiture-tuiles-anciennes-rambouillet",
+      "nettoyage-toiture-maison-velux-rambouillet",
+      "nettoyage-toiture-ardoises-poigny-la-foret"
+    ],
+    "/services-adnot-couvreur/": [
+      "peinture-bois-debord-toit-dampierre-en-yvelines",
+      "remplacement-couverture-tuiles-rambouillet",
+      "faitage-closoir-ventile-rambouillet",
+      "nettoyage-toiture-maison-velux-rambouillet"
+    ]
+  }
+}

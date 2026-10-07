@@ -41,7 +41,7 @@ J'ai ensuite posé un écran de sous-toiture hautement perméable à la vapeur, 
 
 ## Tuiles plates neuves, lucarne et faîtage ventilé
 
-Début août, la nouvelle couverture a été posée en tuiles plates de terre cuite, dans un ton rouge nuancé qui s'accorde avec la meulière. Les maisons en meulière demandent ce soin du détail, jusqu'aux boiseries, comme pour la [peinture des bois de toiture à Dampierre-en-Yvelines](/realisations/peinture-bois-debord-toit-dampierre-en-yvelines/). Une lucarne a été mise en place et couverte avec les mêmes tuiles, pour une toiture homogène. Le faîtage a été refait avec un closoir ventilé, qui assure la sortie de l'air en partie haute.
+Début août, la nouvelle couverture a été posée en tuiles plates de terre cuite, dans un ton rouge nuancé qui s'accorde avec la meulière. Les maisons en meulière demandent ce soin du détail jusqu'au bord du toit, comme pour les [voliges du débord de toit repeintes à Dampierre-en-Yvelines](/realisations/peinture-bois-debord-toit-dampierre-en-yvelines/). Une lucarne a été mise en place et couverte avec les mêmes tuiles, pour une toiture homogène. Le faîtage a été refait avec un closoir ventilé, qui assure la sortie de l'air en partie haute.
 
 ## Une maison qui a retrouvé son caractère
 
